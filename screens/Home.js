@@ -2,11 +2,14 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { auth } from '../firebase';
 import { platCollection } from '../firestore';
 
-export default function Home() {
+export default function Home({ user }) {
+
+  console.log(user)
 
   return (
     <View>
       <Text style={styles.title}>ACME STOCK</Text>
+      <Text>Logged in as {user}</Text>
       <Text>{platCollection}</Text>
     </View>
   );

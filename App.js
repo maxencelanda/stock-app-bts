@@ -17,18 +17,20 @@ export default function App() {
 
   useEffect(() => {
     onAuthStateChanged(firebase_auth, (user) => {
-      console.log("user", user);
+      console.log("user", user.email);
       setUser(user);
     });
   }, []);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">       
+      <Stack.Navigator initialRouteName="Login">   
         {user ? 
-          <Stack.Screen name="Login" component={Login} />
+        (
+          <Stack.Screen name="Home" user={user} component={Home} />
+        )
         :
-          <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Login" component={Login} />
         }
       </Stack.Navigator>
     </NavigationContainer>
