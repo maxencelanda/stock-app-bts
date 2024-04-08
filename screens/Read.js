@@ -39,8 +39,8 @@ const Read  = ({ navigation }) => {
   return (
     <View>
       <Button
-        title='Back to home'
-        onPress={() => navigation.navigate('Home')}
+        title='Add in stock'
+        onPress={() => navigation.navigate('Create')}
         />
         <Details/>
       <FlatList
