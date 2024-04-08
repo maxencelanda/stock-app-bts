@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, FlatList, Text, View } from 'react-native'
+import { Button, FlatList, Text, View, StyleSheet } from 'react-native'
 
 const Crud  = ({ navigation }) => {
   const Data = [
@@ -14,10 +14,22 @@ const Crud  = ({ navigation }) => {
   ]
   const [produit, setProduit] = useState(Data)
 
-
+  const Details = () => {
+    return (
+      <View>
+        <Text>ID</Text>
+        <Text>Categorie</Text>
+        <Text>Produit</Text>
+        <Text>Quantité</Text>
+        <Text>Prix</Text>
+        <Text>Action</Text>
+      </View>
+    )
+  }
   const Produits = ({ nom }) => {
     return(
-    <View>
+    <View style={styles.container}>
+      <Text></Text>
       <Text>{nom}</Text>
     </View>
     )
@@ -28,7 +40,8 @@ const Crud  = ({ navigation }) => {
       <Button
         title='Back to home'
         onPress={() => navigation.navigate('Home')}
-      />
+        />
+        <Details/>
       <FlatList
         data={produit}
         renderItem={({ item }) => <Produits nom={item.nom} />}
@@ -37,5 +50,12 @@ const Crud  = ({ navigation }) => {
     </View>
   )
 }
+const styles= StyleSheet.create({
+    container: {
+        flex: 1
+        
+    }
+})
+
 
 export default Crud
