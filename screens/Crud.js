@@ -5,18 +5,20 @@ const Crud  = ({ navigation }) => {
   const Data = [
     {
       id: '1',
+      categorie:"Mexique",
       nom: 'Tacos'
     },
     {
       id: '2',
-      nom: 'Hamburger'
+      categorie:"USA",
+      nom: 'Hamburger',
     }
   ]
   const [produit, setProduit] = useState(Data)
 
   const Details = () => {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>ID</Text>
         <Text>Categorie</Text>
         <Text>Produit</Text>
@@ -26,10 +28,10 @@ const Crud  = ({ navigation }) => {
       </View>
     )
   }
-  const Produits = ({ nom }) => {
+  const Produits = ({ categorie, nom }) => {
     return(
     <View style={styles.container}>
-      <Text></Text>
+      <Text>{categorie}</Text>
       <Text>{nom}</Text>
     </View>
     )
@@ -44,7 +46,7 @@ const Crud  = ({ navigation }) => {
         <Details/>
       <FlatList
         data={produit}
-        renderItem={({ item }) => <Produits nom={item.nom} />}
+        renderItem={({ item }) => <Produits nom={item.nom} categorie={item.categorie} />}
         keyExtractor={item => item.id}>
       </FlatList>
     </View>
@@ -52,9 +54,13 @@ const Crud  = ({ navigation }) => {
 }
 const styles= StyleSheet.create({
     container: {
-        flex: 1
-        
-    }
+    alignItems: 'center', //Centered horizontally
+      flexDirection: 'row',
+      flex:1
+  },
+  text: {
+    padding:5
+  }
 })
 
 
