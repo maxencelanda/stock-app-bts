@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, FlatList, Text, View, StyleSheet } from 'react-native'
 
-const Crud  = ({ navigation }) => {
+const Read  = ({ navigation }) => {
   const Data = [
     {
       id: '1',
@@ -38,7 +38,6 @@ const Crud  = ({ navigation }) => {
   }
   return (
     <View>
-      <Text>Crud</Text>
       <Button
         title='Back to home'
         onPress={() => navigation.navigate('Home')}
@@ -55,8 +54,7 @@ const Crud  = ({ navigation }) => {
 const styles= StyleSheet.create({
     container: {
     alignItems: 'center', //Centered horizontally
-      flexDirection: 'row',
-      flex:1
+    flexDirection: 'row',
   },
   text: {
     padding:5

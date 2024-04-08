@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 import Login from './screens/Login'
 import Home from './screens/Home'
-import Crud from './screens/Crud'
+import Read from './screens/Read'
 import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { firebase_auth } from './firebase'
@@ -32,7 +32,7 @@ export default function App () {
         ) : (
           <Stack.Screen name='Login' component={Login} />
         )}
-        <Stack.Screen name='Crud' component={Crud}></Stack.Screen>
+        <Stack.Screen name='Read' component={Read}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

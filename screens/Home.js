@@ -11,7 +11,7 @@ export default function Home({ userEmail, navigation }) {
       <Text style={styles.title}>ACME STOCK</Text>
       <Text>Logged in as {userEmail}</Text>
       <Text>{platCollection}</Text>
-      <Button title='Go to CRUD' onPress={() => navigation.navigate('Crud')} />
+      <Button title='Go to Read' onPress={() => navigation.navigate('Read')} />
     </View>
   );
 }
