@@ -33,3 +33,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# fichier inutiles
+*.loo
+*.pdf
+
+#vlad
+test.js
