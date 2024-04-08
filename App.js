@@ -12,16 +12,7 @@ import { firebase_auth } from './firebase'
 
 const Stack = createNativeStackNavigator()
 
-export default function App () {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    onAuthStateChanged(firebase_auth, u => {
-      console.log('user', u)
-      setUser(u)
-    })
-  }, [])
-
+export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
@@ -42,7 +33,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+  },
+});
