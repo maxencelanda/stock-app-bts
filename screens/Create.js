@@ -1,4 +1,5 @@
-import { useState } from "react"
+import React, { useState } from "react"
+import {View, Text} from "react-native";
 
 const Create = ({ }) => {
     const [categorie, setCategorie] = useState('')
@@ -9,7 +10,7 @@ const Create = ({ }) => {
 
     return (
         <View>
-            
+            <Text>Le menu create</Text>
         </View>
     )
 }
