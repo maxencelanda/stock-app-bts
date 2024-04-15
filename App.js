@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, {useEffect, useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
@@ -10,10 +9,21 @@ import Home from './screens/Home'
 import Create from './screens/Create'
 import Read from './screens/Read'
 import CrudCreate from './screens/CrudCreate';
+import { onAuthStateChanged } from 'firebase/auth'
+import {firebase_auth} from "./firebase";
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    onAuthStateChanged(firebase_auth, u => {
+      console.log('user', u)
+      setUser(u)
+    })
+  }, [])
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='LoginScreen'>
@@ -26,7 +36,6 @@ export default function App() {
         )}
         <Stack.Screen name='Read' component={Read}></Stack.Screen>
         <Stack.Screen name='Create' component={Create}></Stack.Screen>
-        <Stack.Screen name="CrudCreate" component={CrudCreate} />
       </Stack.Navigator>
     </NavigationContainer>
   )
