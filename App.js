@@ -8,9 +8,9 @@ import LoginScreen from "./screens/LoginScreen";
 import Home from './screens/Home'
 import Create from './screens/Create'
 import Read from './screens/Read'
-import CrudCreate from './screens/CrudCreate';
 import { onAuthStateChanged } from 'firebase/auth'
 import {firebase_auth} from "./firebase";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const Stack = createNativeStackNavigator()
 
@@ -34,6 +34,7 @@ export default function App() {
         ) : (
           <Stack.Screen name='Login' component={LoginScreen} />
         )}
+        <Stack.Screen name='Register' component={RegisterScreen}/>
         <Stack.Screen name='Read' component={Read}></Stack.Screen>
         <Stack.Screen name='Create' component={Create}></Stack.Screen>
       </Stack.Navigator>

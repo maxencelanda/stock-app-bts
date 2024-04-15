@@ -4,7 +4,7 @@ import {View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator} 
 import {firebase_auth} from "../firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -23,21 +23,11 @@ const LoginScreen = () => {
     }
   }
 
-  const signUp = async () => {
-    setLoading(true);
-    try {
-        const response = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(response);
-    } catch (error) {
-        console.log(error);
-    } finally {
-        setLoading(false);
-    }
-  }
+
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Inscrivez-vous</Text>
+      <Text style={styles.title}>Connectez-vous</Text>
       <Text style={styles.subtitle}>Entrez vos identifiants</Text>
 
       <TextInput 
@@ -63,7 +53,7 @@ const LoginScreen = () => {
 
           <View style={styles.register}>
               <Text>Si vous n'avez pas de compte,</Text>
-              <TouchableOpacity onPress={signUp}>
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
                   <Text style={styles.loginText}>Inscrivez-vous</Text>
               </TouchableOpacity>
           </View>

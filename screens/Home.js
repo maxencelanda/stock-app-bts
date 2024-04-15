@@ -11,7 +11,6 @@ export default function Home ({ userEmail, navigation }) {
       <Text>Logged in as {userEmail}</Text>
       <Text>{platCollection}</Text>
       <Button title="Go to Read" onPress={() => navigation.navigate("Read")} />
-      <Button title='Go to CRUD' onPress={() => navigation.navigate('Crud')} />
     </View>
   )
 }

@@ -55,7 +55,6 @@ const Read = ({ navigation }) => {
 					transparent={true}
 					visible={modalVisible}
 					onRequestClose={() => {
-						Alert.alert("Modal has been closed.");
 						setModalVisible(!modalVisible);
 					}}
 				>
@@ -70,7 +69,7 @@ const Read = ({ navigation }) => {
 					</View>
 				</Modal>
 				<Pressable onPress={() => setModalVisible(true)}>
-					<Text style={{ padding: 5 }}>Details</Text>
+					<Text style={{ padding: 5, color:"blue" }}>Details</Text>
 				</Pressable>
 			</View>
 		);
@@ -111,7 +110,7 @@ const style = StyleSheet.create({
 		borderBottomWidth: 1,
 		padding:3,
 	},
-	//modal
+	//css du modal, rien à foutre cest copilot qui la fait
 	modalView: {
 		margin: 20,
 		backgroundColor: "white",
