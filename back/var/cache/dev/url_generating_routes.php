@@ -15,5 +15,7 @@ return [
     '_api_validation_errors_jsonapi' => [['id'], ['_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_jsonapi'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/api/validation_errors']], [], [], []],
     '_preview_error' => [['code', '_format'], ['_controller' => 'error_controller::preview', '_format' => 'html'], ['code' => '\\d+'], [['variable', '.', '[^/]++', '_format', true], ['variable', '/', '\\d+', 'code', true], ['text', '/_error']], [], [], []],
     'app_product' => [[], ['_controller' => 'App\\Controller\\ProductController::getProducts'], [], [['text', '/product']], [], [], []],
+    'app_p' => [[], ['_controller' => 'App\\Controller\\ProductController::productPage'], [], [['text', '/productPage']], [], [], []],
     'App\Controller\ProductController::getProducts' => [[], ['_controller' => 'App\\Controller\\ProductController::getProducts'], [], [['text', '/product']], [], [], []],
+    'App\Controller\ProductController::productPage' => [[], ['_controller' => 'App\\Controller\\ProductController::productPage'], [], [['text', '/productPage']], [], [], []],
 ];
