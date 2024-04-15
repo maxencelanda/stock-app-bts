@@ -1,18 +1,19 @@
-import { StyleSheet, Text, TextInput, View, Button } from "react-native";
-import { auth } from "../firebase";
-import { platCollection } from "../firestore";
+import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import { auth } from '../firebase'
+import { platCollection } from '../firestore'
 
-export default function Home({ userEmail, navigation }) {
-  console.log("user received: " + userEmail);
-
+export default function Home ({ userEmail, navigation }) {
+  console.log('user received: ' + userEmail)
+  
   return (
     <View>
       <Text style={styles.title}>ACME STOCK</Text>
       <Text>Logged in as {userEmail}</Text>
       <Text>{platCollection}</Text>
       <Button title="Go to Read" onPress={() => navigation.navigate("Read")} />
+      <Button title='Go to CRUD' onPress={() => navigation.navigate('Crud')} />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
