@@ -20,7 +20,7 @@ class Category
 
     /**
      * @var Collection<int, Product>
-     */
+    */
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'idCategory')]
     private Collection $products;
 
