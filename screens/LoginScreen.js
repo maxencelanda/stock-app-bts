@@ -1,6 +1,8 @@
 // RegisterScreen.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
+import {firebase_auth} from "../firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -55,14 +57,14 @@ const LoginScreen = () => {
       { loading ? (<ActivityIndicator size="large" color="#0000FF"/>) : 
         (
         <>
-          <TouchableOpacity onPress={handleLogin} style={styles.button}>
+          <TouchableOpacity onPress={signIn} style={styles.button}>
               <Text style={{color: '#fff'}}>Se connecter</Text>
           </TouchableOpacity>
 
           <View style={styles.register}>
               <Text>Si vous n'avez pas de compte,</Text>
-              <TouchableOpacity onPress={() => console.log('Naviguer vers Inscription')}>
-                  <Text style={styles.registerText}>Inscrivez-vous</Text>
+              <TouchableOpacity onPress={signUp}>
+                  <Text style={styles.loginText}>Inscrivez-vous</Text>
               </TouchableOpacity>
           </View>
         </>
@@ -107,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegisterScreen;
+export default LoginScreen;
