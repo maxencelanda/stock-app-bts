@@ -11,26 +11,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Serializer\Context\Normalizer\ObjectNormalizerContextBuilder;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product', name: 'app_product')]
-    public function getProducts(ProductRepository $productRepository, CategoryRepository $categoryRepository, SerializerInterface $serializer): JsonResponse
+    #[Route('/product')]
+    public function getProducts(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
     {
         $products = $productRepository->findAll();
         $productsJson = $serializer->serialize($products, 'json', ['groups' => ['product']]);
         return new JsonResponse($productsJson, Response::HTTP_OK, [], true);
     }
 
-    #[Route('/productPage', name: 'app_p')]
-    public function productPage(ProductRepository $productRepository): Response
+    #[Route('/product/{id}', requirements: ["id" => Requirement::DIGITS])]
+    public function getProduct(Product $product)
     {
-        $products = $productRepository->find(11);
-        return $this->render('p/index.html.twig', [
-            'categoryId' => $products->getIdCategory()->getId(),
-            'categoryName' => $products->getIdCategory()->getName(),
-        ]);
+        return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }
 }

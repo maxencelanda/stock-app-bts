@@ -17,7 +17,7 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['product'])]
+    #[Groups(['product', 'compositions'])]
     private ?string $name = null;
 
     #[ORM\Column]
