@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,14 +17,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'app_product')]
-    public function getProducts(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
+    public function getProducts(ProductRepository $productRepository, CategoryRepository $categoryRepository, SerializerInterface $serializer): JsonResponse
     {
-        /*
-        $productsJson = $serializer->serialize($products, 'json', ['groups' => ['product']]);
-        */
         $products = $productRepository->findAll();
-        $context = (new ObjectNormalizerContextBuilder())->withGroups(['products', 'category'])->toArray();
-        $productsJson = $serializer->serialize($products, 'json', $context);
+        $productsJson = $serializer->serialize($products, 'json', ['groups' => ['product']]);
         return new JsonResponse($productsJson, Response::HTTP_OK, [], true);
     }
 

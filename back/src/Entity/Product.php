@@ -8,26 +8,29 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\MaxDepth;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[Groups(['product'])]
 class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['product'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['product'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['product'])]
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Groups(['product'])]
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
-    #[MaxDepth(1)]
+    #[Groups(['product'])]
     private ?Category $idCategory = null;
 
     public function getId(): ?int
