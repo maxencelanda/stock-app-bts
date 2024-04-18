@@ -1,3 +1,4 @@
+// RegisterScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
@@ -34,21 +35,20 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Connectez-vous</Text>
+      <Text style={styles.title}>Inscrivez-vous</Text>
       <Text style={styles.subtitle}>Entrez vos identifiants</Text>
 
       <TextInput 
         style={styles.input} 
         placeholder="Entrez votre adresse mail" 
-        onChangeText={(text) => setEmail(text)}
+        onChangeText={setEmail} 
         value={email}
       />
-
       <TextInput 
         style={styles.input} 
         placeholder="Entrez votre mot de passe" 
         secureTextEntry
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={setPassword} 
         value={password}
       />
 
@@ -88,24 +88,23 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'purple',
     borderWidth: 1,
     marginBottom: 20,
     width: '80%',
     paddingLeft: 10,
+    borderRadius: 5,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: 'purple',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
-  register: {
+  loginText: {
     marginTop: 20,
-  },
-  registerText: {
     color: 'blue',
   },
 });
 
-export default LoginScreen;
+export default RegisterScreen;

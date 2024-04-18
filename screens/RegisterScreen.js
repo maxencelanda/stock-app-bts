@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 
 const RegisterScreen = () => {
+  const navigation = navigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,6 +33,10 @@ const RegisterScreen = () => {
       <TouchableOpacity onPress={register} style={styles.button}>
           <Text style={{color: '#fff'}}>S'inscrire</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+          <Text style={styles.loginText}>Déjà un compte ? Connectez-vous</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -42,7 +47,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    padding: 16,
   },
   title: {
     fontSize: 24,
@@ -66,6 +70,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+  },
+  loginText: {
+    marginTop: 20,
+    color: 'blue',
   },
 });
 

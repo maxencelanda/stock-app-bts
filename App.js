@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import CrudCreate from './screens/CrudCreate';
+
+const Stack = createStackNavigator();
+=======
 import { NavigationContainer } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
@@ -11,10 +19,19 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { firebase_auth } from './firebase'
 
 const Stack = createNativeStackNavigator()
+>>>>>>> 1da0fd08f479732c9d99fb88d31e43918e5ebb1c
 
 export default function App() {
   return (
     <NavigationContainer>
+<<<<<<< HEAD
+      <Stack.Navigator>
+        <Stack.Screen name="CrudCreate" component={CrudCreate} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+=======
       <Stack.Navigator initialRouteName='Login'>
         {user ? (
           <Stack.Screen name='Home'>
@@ -35,3 +52,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+>>>>>>> 1da0fd08f479732c9d99fb88d31e43918e5ebb1c
