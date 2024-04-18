@@ -38,6 +38,3 @@ yarn-error.*
 # fichier inutiles
 *.loo
 *.pdf
-
-#vlad
-test.js
