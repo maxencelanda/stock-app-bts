@@ -10,6 +10,7 @@ return [
     [ // $staticRoutes
         '/composition' => [[['_route' => 'app_composition_getcompositions', '_controller' => 'App\\Controller\\CompositionController::getCompositions'], null, null, null, false, false, null]],
         '/product' => [[['_route' => 'app_product_getproducts', '_controller' => 'App\\Controller\\ProductController::getProducts'], null, null, null, false, false, null]],
+        '/product/create' => [[['_route' => 'app_product_createproduct', '_controller' => 'App\\Controller\\ProductController::createProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -28,7 +29,8 @@ return [
                     .')'
                 .')'
                 .'|/_error/(\\d+)(?:\\.([^/]++))?(*:250)'
-                .'|/product/([0-9]+)(*:275)'
+                .'|/composition/([0-9]+)(*:279)'
+                .'|/product/([0-9]+)(*:304)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -47,7 +49,8 @@ return [
             [['_route' => '_api_validation_errors_jsonapi', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_jsonapi'], ['id'], ['GET' => 0], null, false, true, null],
         ],
         250 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        275 => [
+        279 => [[['_route' => 'app_composition_getproduitcomposition', '_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id'], null, null, false, true, null]],
+        304 => [
             [['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
