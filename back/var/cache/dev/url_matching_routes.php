@@ -9,6 +9,7 @@ return [
     false, // $matchHost
     [ // $staticRoutes
         '/composition' => [[['_route' => 'app_composition_getcompositions', '_controller' => 'App\\Controller\\CompositionController::getCompositions'], null, null, null, false, false, null]],
+        '/composition/create' => [[['_route' => 'app_composition_createcomposition', '_controller' => 'App\\Controller\\CompositionController::createComposition'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/product' => [[['_route' => 'app_product_getproducts', '_controller' => 'App\\Controller\\ProductController::getProducts'], null, null, null, false, false, null]],
         '/product/create' => [[['_route' => 'app_product_createproduct', '_controller' => 'App\\Controller\\ProductController::createProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/product/edit' => [[['_route' => 'app_product_editproduct', '_controller' => 'App\\Controller\\ProductController::editProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
@@ -30,10 +31,13 @@ return [
                     .')'
                 .')'
                 .'|/_error/(\\d+)(?:\\.([^/]++))?(*:250)'
-                .'|/composition/([0-9]+)(*:279)'
+                .'|/composition/(?'
+                    .'|([0-9]+)(*:282)'
+                    .'|delete/([0-9]+)(*:305)'
+                .')'
                 .'|/product/(?'
-                    .'|([0-9]+)(*:307)'
-                    .'|delete/([0-9]+)(*:330)'
+                    .'|([0-9]+)(*:334)'
+                    .'|delete/([0-9]+)(*:357)'
                 .')'
             .')/?$}sDu',
     ],
@@ -53,9 +57,10 @@ return [
             [['_route' => '_api_validation_errors_jsonapi', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_jsonapi'], ['id'], ['GET' => 0], null, false, true, null],
         ],
         250 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        279 => [[['_route' => 'app_composition_getproduitcomposition', '_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id'], null, null, false, true, null]],
-        307 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
-        330 => [
+        282 => [[['_route' => 'app_composition_getproduitcomposition', '_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id'], null, null, false, true, null]],
+        305 => [[['_route' => 'app_composition_deletecomposition', '_controller' => 'App\\Controller\\CompositionController::deleteComposition'], ['id'], null, null, false, true, null]],
+        334 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
+        357 => [
             [['_route' => 'app_product_deleteproduct', '_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
