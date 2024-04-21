@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 	Pressable,
 	Alert,
-	Modal,
+	Modal, SafeAreaView, ScrollView,
 } from "react-native";
 const axios = require('axios').default;
 const apiUrl = process.env.EXPO_PUBLIC_API_URL
@@ -60,6 +60,7 @@ const Read = ({ navigation }) => {
 	};
 	const Produits = ({ id, nom, categorie, quantite, prix }) => {
 		return (
+			<ScrollView>
 			<View style={style.produits}>
 				<Text style={{ padding: 5 }}>{id}</Text>
 				<Text style={{ padding: 5 }}>{categorie}</Text>
@@ -95,15 +96,22 @@ const Read = ({ navigation }) => {
 					<Text style={{ padding: 5, color:"blue" }}>Details</Text>
 				</Pressable>
 			</View>
+			</ScrollView>
 		);
 	};
 	return (
-		<View style={style.container}>
-			<Button
-				title="Add in stock"
-				onPress={() => navigation.navigate("Create")}
-			/>
+		<SafeAreaView style={style.container}>
 
+			<View style={style.alignVertical}>
+			<Button
+				title="Add product"
+				onPress={() => navigation.navigate("CreateProduct")}
+			/>
+			<Button
+				title="Add category"
+				onPress={() => navigation.navigate("CreateProduct")}
+			/>
+			</View>
 			<Details />
 			{loading ? (
 				<Text>Chargement des produits en cours...</Text>
@@ -122,7 +130,7 @@ const Read = ({ navigation }) => {
 					keyExtractor={(item) => item.id}
 				/>
 			)}
-		</View>
+		</SafeAreaView>
 	);
 };
 const style = StyleSheet.create({
@@ -137,6 +145,9 @@ const style = StyleSheet.create({
 		justifyContent: "space-around",
 		borderBottomWidth: 1,
 		padding:3,
+	},
+	alignVertical: {
+		flexDirection: "row",
 	},
 	//css du modal, rien à foutre cest copilot qui la fait
 	modalView: {

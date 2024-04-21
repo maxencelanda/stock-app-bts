@@ -1,0 +1,102 @@
+import React, {useEffect, useState} from 'react';
+import { View, Text, TextInput, Button, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+
+const CreateProduct = ({navigation}) => {
+  const [Produit, setProduit] = useState([]);
+  const [Name, setName] = useState('')
+  const [CategoryId, setCategoryId] = useState('');
+  const [CategoryName, setCategoryName]= useState('')
+  const [Price, setPrice] = useState()
+  const [Quantity, setQuantity] = useState()
+  const [Envoi, setEnvoi] = useState(false)
+
+// FAIRE UN USE EFFECT QUI AJOUTE TOUT AU PRODUIT A LA FIN SUR LE BOUTON
+ useEffect(()=>{
+   setProduit([
+       "name": "Galette Saucisse",
+       "price": 9.0,
+       "quantity": 8,
+       "idCategory": {
+     "id": 2,
+         "name": "Tex-Mex\r\n"
+   }
+   ])
+
+ },[Envoi])
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>CRUD</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Nom du produit"
+        value={Name}
+        onChangeText={(text) => setName(text)}
+      />
+      <TextInput
+          style={styles.input}
+          placeholder="Nom du produit"
+          value={Name}
+          onChangeText={(text) => setName(text)}
+      />
+      <TextInput
+          style={styles.input}
+          placeholder="Nom du produit"
+          value={Name}
+          onChangeText={(text) => setName(text)}
+      />
+      <TextInput
+          style={styles.input}
+          placeholder="Nom du produit"
+          value={Name}
+          onChangeText={(text) => setName(text)}
+      />
+      <TextInput
+          style={styles.input}
+          placeholder="Nom du produit"
+          value={Name}
+          onChangeText={(text) => setName(text)}
+      />
+      <TouchableOpacity onPress={()=> {
+        setEnvoi(true)
+        navigation.navigate("Home")
+      }
+      }
+        style={styles.button}>
+        <Text style={{ color: '#fff' }}>Créer</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'purple',
+    borderWidth: 1,
+    marginBottom: 20,
+    width: '80%',
+    paddingLeft: 10,
+    borderRadius: 5,
+  },
+  button: {
+    backgroundColor: 'purple',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+});
+
+export default CreateProduct;

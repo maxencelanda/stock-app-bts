@@ -7,10 +7,11 @@ export default function Home ({ userEmail, navigation }) {
   
   return (
     <View>
-      <Text style={styles.title}>ACME STOCK</Text>
-      <Text>Logged in as {userEmail}</Text>
-      <Text>{platCollection}</Text>
-      <Button title="Go to Read" onPress={() => navigation.navigate("Read")} />
+        <Text style={styles.title}>ACME STOCK</Text>
+        <Text>Logged in as {userEmail}</Text>
+        <Text>{platCollection}</Text>
+        <Button title="Go to Read" onPress={() => navigation.navigate("Read")} />
+        <Button title="Create products" onPress={()=> navigation.navigate("CreateProduct")}/>
     </View>
   )
 }
