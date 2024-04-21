@@ -32,6 +32,7 @@ return [
     'app_product_createproduct' => [[], ['_controller' => 'App\\Controller\\ProductController::createProduct'], [], [['text', '/product/create']], [], [], []],
     'app_product_editproduct' => [[], ['_controller' => 'App\\Controller\\ProductController::editProduct'], [], [['text', '/product/edit']], [], [], []],
     'app_product_deleteproduct' => [['id'], ['_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product/delete']], [], [], []],
+    'app_product_getproductdateexp' => [['id'], ['_controller' => 'App\\Controller\\ProductController::getProductDateExp'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product/date']], [], [], []],
     'App\Controller\CategoryController::getCategory' => [[], ['_controller' => 'App\\Controller\\CategoryController::getCategory'], [], [['text', '/category']], [], [], []],
     'App\Controller\CategoryController::createCategory' => [[], ['_controller' => 'App\\Controller\\CategoryController::createCategory'], [], [['text', '/category/create']], [], [], []],
     'App\Controller\CategoryController::editCategory' => [[], ['_controller' => 'App\\Controller\\CategoryController::editCategory'], [], [['text', '/category/edit']], [], [], []],
@@ -50,4 +51,5 @@ return [
     'App\Controller\ProductController::createProduct' => [[], ['_controller' => 'App\\Controller\\ProductController::createProduct'], [], [['text', '/product/create']], [], [], []],
     'App\Controller\ProductController::editProduct' => [[], ['_controller' => 'App\\Controller\\ProductController::editProduct'], [], [['text', '/product/edit']], [], [], []],
     'App\Controller\ProductController::deleteProduct' => [['id'], ['_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product/delete']], [], [], []],
+    'App\Controller\ProductController::getProductDateExp' => [['id'], ['_controller' => 'App\\Controller\\ProductController::getProductDateExp'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product/date']], [], [], []],
 ];

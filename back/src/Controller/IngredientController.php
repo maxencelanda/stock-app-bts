@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ingredient;
+use App\Repository\CompositionRepository;
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,8 +53,12 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/ingredient/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
-    public function deleteIngredient(Ingredient $ingredient, EntityManagerInterface $em)
+    public function deleteIngredient(Ingredient $ingredient, EntityManagerInterface $em, CompositionRepository $compositionRepository)
     {
+        $compositions = $compositionRepository->findByIngredient($ingredient->getId());
+        foreach($compositions as $compo){
+            $em->remove($compo);
+        }
         $em->remove($ingredient);
         $em->flush();
         return $this->json($ingredient, Response::HTTP_OK, [], ['groups' => ['ingredients']]);

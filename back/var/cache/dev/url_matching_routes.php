@@ -50,7 +50,10 @@ return [
                 .')'
                 .'|/product/(?'
                     .'|([0-9]+)(*:424)'
-                    .'|delete/([0-9]+)(*:447)'
+                    .'|d(?'
+                        .'|elete/([0-9]+)(*:450)'
+                        .'|ate/([0-9]+)(*:470)'
+                    .')'
                 .')'
             .')/?$}sDu',
     ],
@@ -76,8 +79,9 @@ return [
         372 => [[['_route' => 'app_ingredient_getproduct', '_controller' => 'App\\Controller\\IngredientController::getProduct'], ['id'], null, null, false, true, null]],
         395 => [[['_route' => 'app_ingredient_deleteingredient', '_controller' => 'App\\Controller\\IngredientController::deleteIngredient'], ['id'], null, null, false, true, null]],
         424 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
-        447 => [
-            [['_route' => 'app_product_deleteproduct', '_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id'], null, null, false, true, null],
+        450 => [[['_route' => 'app_product_deleteproduct', '_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id'], null, null, false, true, null]],
+        470 => [
+            [['_route' => 'app_product_getproductdateexp', '_controller' => 'App\\Controller\\ProductController::getProductDateExp'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
