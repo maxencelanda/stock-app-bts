@@ -35,8 +35,35 @@ class ProductController extends AbstractController
     #[Route('/product/create', methods: ["POST", "GET"])]
     public function createProduct(Request $request, EntityManagerInterface $em, SerializerInterface $serializer, CategoryRepository $categoryRepository)
     {
+        $productData = json_decode($request->getContent(), true);
+        $category = $categoryRepository->find($productData["idCategory"]["id"]);
         $product = $serializer->deserialize($request->getContent(), Product::class, 'json');
+        $product->setIdCategory($category);
         $em->persist($product);
+        $em->flush();
+        return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
+    }
+
+    #[Route('/product/edit', methods: ["POST", "GET"])]
+    public function editProduct(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository, ProductRepository $productRepository)
+    {
+        $productData = json_decode($request->getContent(), true);
+        $product = $productRepository->find($productData["id"]);
+        $category = $categoryRepository->find($productData["idCategory"]["id"]);
+
+        $product->setName($productData["name"]);
+        $product->setPrice($productData["price"]);
+        $product->setQuantity($productData["quantity"]);
+        $product->setIdCategory($category);
+        $em->persist($product);
+        $em->flush();
+        return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
+    }
+
+    #[Route('/product/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
+    public function deleteProduct(Product $product, EntityManagerInterface $em)
+    {
+        $em->remove($product);
         $em->flush();
         return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }

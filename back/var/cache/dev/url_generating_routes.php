@@ -19,9 +19,13 @@ return [
     'app_product_getproducts' => [[], ['_controller' => 'App\\Controller\\ProductController::getProducts'], [], [['text', '/product']], [], [], []],
     'app_product_getproduct' => [['id'], ['_controller' => 'App\\Controller\\ProductController::getProduct'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product']], [], [], []],
     'app_product_createproduct' => [[], ['_controller' => 'App\\Controller\\ProductController::createProduct'], [], [['text', '/product/create']], [], [], []],
+    'app_product_editproduct' => [[], ['_controller' => 'App\\Controller\\ProductController::editProduct'], [], [['text', '/product/edit']], [], [], []],
+    'app_product_deleteproduct' => [['id'], ['_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product/delete']], [], [], []],
     'App\Controller\CompositionController::getCompositions' => [[], ['_controller' => 'App\\Controller\\CompositionController::getCompositions'], [], [['text', '/composition']], [], [], []],
     'App\Controller\CompositionController::getProduitComposition' => [['id'], ['_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/composition']], [], [], []],
     'App\Controller\ProductController::getProducts' => [[], ['_controller' => 'App\\Controller\\ProductController::getProducts'], [], [['text', '/product']], [], [], []],
     'App\Controller\ProductController::getProduct' => [['id'], ['_controller' => 'App\\Controller\\ProductController::getProduct'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product']], [], [], []],
     'App\Controller\ProductController::createProduct' => [[], ['_controller' => 'App\\Controller\\ProductController::createProduct'], [], [['text', '/product/create']], [], [], []],
+    'App\Controller\ProductController::editProduct' => [[], ['_controller' => 'App\\Controller\\ProductController::editProduct'], [], [['text', '/product/edit']], [], [], []],
+    'App\Controller\ProductController::deleteProduct' => [['id'], ['_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id' => '[0-9]+'], [['variable', '/', '[0-9]+', 'id', true], ['text', '/product/delete']], [], [], []],
 ];
