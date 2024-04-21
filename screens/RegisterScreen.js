@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+
 import { View, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
-const RegisterScreen = () => {
+
+
+
+const RegisterScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,11 +38,11 @@ const RegisterScreen = () => {
           <Text style={{color: '#fff'}}>S'inscrire</Text>
       </TouchableOpacity>
 
+
       <Text style={{color: 'purple'}}
       onPress={() => Linking.openURL('/LoginScreen')}>
       Vous avez déjà un compte ? Connectez vous
       </Text>
-
     </View>
   );
 };
@@ -49,7 +53,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    padding: 16,
   },
   title: {
     fontSize: 24,
@@ -73,6 +76,10 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
+  },
+  loginText: {
+    marginTop: 20,
+    color: 'blue',
   },
 });
 

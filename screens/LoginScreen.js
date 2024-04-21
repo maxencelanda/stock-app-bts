@@ -1,15 +1,29 @@
+// RegisterScreen.js
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
+import {firebase_auth} from "../firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
 
-const LoginScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginScreen = ({navigation}) => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleLogin = () => {
-    // logique de connexion
-    console.log('Email:', email);
-    console.log('Password:', password);
-  };
+  const auth = firebase_auth;
+
+  const signIn = async () => {
+    setLoading(true);
+    try {
+        const response = await signInWithEmailAndPassword(auth, email, password);
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    } finally {
+        setLoading(false);
+    }
+  }
+
+
 
   return (
     <View style={styles.container}>
@@ -19,28 +33,32 @@ const LoginScreen = () => {
       <TextInput 
         style={styles.input} 
         placeholder="Entrez votre adresse mail" 
-        onChangeText={(text) => setEmail(text)}
+        onChangeText={setEmail} 
         value={email}
       />
-
       <TextInput 
         style={styles.input} 
         placeholder="Entrez votre mot de passe" 
         secureTextEntry
-        onChangeText={(text) => setPassword(text)}
+        onChangeText={setPassword} 
         value={password}
       />
 
-      <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={{color: '#fff'}}>Se connecter</Text>
-      </TouchableOpacity>
-
-      <View style={styles.register}>
-          <Text>Si vous n'avez pas de compte,</Text>
-          <TouchableOpacity onPress={() => console.log('Naviguer vers Inscription')}>
-              <Text style={styles.registerText}>Inscrivez-vous</Text>
+      { loading ? (<ActivityIndicator size="large" color="#0000FF"/>) : 
+        (
+        <>
+          <TouchableOpacity onPress={signIn} style={styles.button}>
+              <Text style={{color: '#fff'}}>Se connecter</Text>
           </TouchableOpacity>
-       </View>
+
+          <View style={styles.register}>
+              <Text>Si vous n'avez pas de compte,</Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+                  <Text style={styles.loginText}>Inscrivez-vous</Text>
+              </TouchableOpacity>
+          </View>
+        </>
+        )}
     </View>
   );
 };
@@ -62,22 +80,21 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: 'purple',
     borderWidth: 1,
     marginBottom: 20,
     width: '80%',
     paddingLeft: 10,
+    borderRadius: 5,
   },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: 'purple',
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
   },
-  register: {
+  loginText: {
     marginTop: 20,
-  },
-  registerText: {
     color: 'blue',
   },
 });
