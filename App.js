@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+import Header from './screens/Header';
 import LoginScreen from "./screens/LoginScreen";
 import Home from './screens/Home'
 import Create from './screens/Create'
@@ -24,27 +25,52 @@ export default function App() {
     })
   }, [])
 
+  if (!user){
   return (
     <NavigationContainer>
+      <View style={styles.container}>
       <Stack.Navigator initialRouteName='LoginScreen'>
         {user ? (
-          <Stack.Screen name='Home'>
+          <Stack.Screen options={{ headerShown: false }} name='Home'>
             {props => <Home {...props} userEmail={user.email} />}
           </Stack.Screen>
         ) : (
-          <Stack.Screen name='Login' component={LoginScreen} />
+          <Stack.Screen options={{ headerShown: false }} name='Login' component={LoginScreen} />
         )}
-        <Stack.Screen name='Register' component={RegisterScreen}/>
-        <Stack.Screen name='Read' component={Read}></Stack.Screen>
-        <Stack.Screen name='Create' component={Create}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name='Register' component={RegisterScreen}/>
+        <Stack.Screen options={{ headerShown: false }} name='Read' component={Read}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name='Create' component={Create}></Stack.Screen>
       </Stack.Navigator>
+      </View>
     </NavigationContainer>
   )
+} else {
+  return (
+    <NavigationContainer>
+      <View style={styles.container}>
+      <Header/>
+      <Stack.Navigator initialRouteName='LoginScreen'>
+        {user ? (
+          <Stack.Screen options={{ headerShown: false }} name='Home'>
+            {props => <Home {...props} userEmail={user.email} />}
+          </Stack.Screen>
+        ) : (
+          <Stack.Screen options={{ headerShown: false }} name='Login' component={LoginScreen} />
+        )}
+        <Stack.Screen options={{ headerShown: false }} name='Register' component={RegisterScreen}/>
+        <Stack.Screen options={{ headerShown: false }} name='Read' component={Read}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name='Create' component={Create}></Stack.Screen>
+      </Stack.Navigator>
+      </View>
+    </NavigationContainer>
+  )
+} 
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     backgroundColor: '#fff',
   },
 });
