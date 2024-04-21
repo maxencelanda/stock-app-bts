@@ -12,15 +12,16 @@ const CreateProduct = ({navigation}) => {
 
 // FAIRE UN USE EFFECT QUI AJOUTE TOUT AU PRODUIT A LA FIN SUR LE BOUTON
  useEffect(()=>{
-   setProduit([
-       "name": "Galette Saucisse",
-       "price": 9.0,
-       "quantity": 8,
-       "idCategory": {
-     "id": 2,
-         "name": "Tex-Mex\r\n"
-   }
-   ])
+  axios.post('/user', {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
  },[Envoi])
 
