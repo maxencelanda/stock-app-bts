@@ -13,8 +13,13 @@ const CreateProduct = ({navigation}) => {
 // FAIRE UN USE EFFECT QUI AJOUTE TOUT AU PRODUIT A LA FIN SUR LE BOUTON
  useEffect(()=>{
   axios.post('/user', {
-    firstName: 'Fred',
-    lastName: 'Flintstone'
+    "name": Name,
+    "price": Price,
+    "quantity": Quantity,
+    "idCategory": {
+    "id": CategoryId,
+    "name": CategoryName
+    }
   })
   .then(function (response) {
     console.log(response);
@@ -36,27 +41,27 @@ const CreateProduct = ({navigation}) => {
       />
       <TextInput
           style={styles.input}
-          placeholder="Nom du produit"
-          value={Name}
-          onChangeText={(text) => setName(text)}
+          placeholder="Id de la Categorie"
+          value={CategoryId}
+          onChangeText={(text) => setCategoryId(text)}
+      />
+      <TextInput
+          style={styles.input}
+          placeholder="Nom de la Categorie"
+          value={CategoryName}
+          onChangeText={(text) => setCategoryName(text)}
+      />
+      <TextInput
+          style={styles.input}
+          placeholder="Prix du produit"
+          value={Price}
+          onChangeText={(text) => setPrice(text)}
       />
       <TextInput
           style={styles.input}
           placeholder="Nom du produit"
-          value={Name}
-          onChangeText={(text) => setName(text)}
-      />
-      <TextInput
-          style={styles.input}
-          placeholder="Nom du produit"
-          value={Name}
-          onChangeText={(text) => setName(text)}
-      />
-      <TextInput
-          style={styles.input}
-          placeholder="Nom du produit"
-          value={Name}
-          onChangeText={(text) => setName(text)}
+          value={Quantity}
+          onChangeText={(text) => setQuantity(text)}
       />
       <TouchableOpacity onPress={()=> {
         setEnvoi(true)
