@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class CategoryController extends AbstractController
 {
     #[Route('/category')]
-    public function getCompositions(CategoryRepository $categoryRepository, SerializerInterface $serializer): JsonResponse
+    public function getCategory(CategoryRepository $categoryRepository, SerializerInterface $serializer): JsonResponse
     {
         $categories = $categoryRepository->findAll();
         $categoriesJson = $serializer->serialize($categories, 'json', ['groups' => ['categories']]);
@@ -33,7 +33,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/category/edit', methods: ["POST", "GET"])]
-    public function editProduct(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository)
+    public function editCategory(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository)
     {
         $categoryData = json_decode($request->getContent(), true);
         $category = $categoryRepository->find($categoryData["id"]);
@@ -45,7 +45,7 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/category/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
-    public function deleteProduct(Category $category, EntityManagerInterface $em)
+    public function deleteCategory(Category $category, EntityManagerInterface $em)
     {
         $em->remove($category);
         $em->flush();

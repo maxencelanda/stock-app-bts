@@ -400,6 +400,13 @@
         <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\CompositionController"/>
       </call>
     </service>
+    <service id="App\Controller\IngredientController" class="App\Controller\IngredientController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\IngredientController"/>
+      </call>
+    </service>
     <service id="App\Controller\ProductController" class="App\Controller\ProductController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -457,7 +464,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.zK.wY9i"/>
+      <argument type="service" id=".service_locator.VEj5MTV"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1911,7 +1918,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.zK.wY9i"/>
+      <argument type="service" id=".service_locator.VEj5MTV"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -5550,6 +5557,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CompositionController" class="App\Controller\CompositionController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CompositionController" class="App\Controller\CompositionController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CompositionController" class="App\Controller\CompositionController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\IngredientController" class="App\Controller\IngredientController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\IngredientController" class="App\Controller\IngredientController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\IngredientController" class="App\Controller\IngredientController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6053,6 +6063,13 @@
         <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
       </argument>
     </service>
+    <service id=".service_locator.jpMxd.y" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="ingredientRepository" type="service_closure" id="App\Repository\IngredientRepository"/>
+        <argument key="serializer" type="service_closure" id="serializer"/>
+      </argument>
+    </service>
     <service id=".service_locator.tK5vR04" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6089,17 +6106,18 @@
         <argument key="product" type="service_closure" id=".errored..service_locator.OE1bLno.App\Entity\Product"/>
       </argument>
     </service>
-    <service id=".service_locator.zK.wY9i" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.VEj5MTV" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\CategoryController::createCategory" type="service_closure" id=".service_locator.Km2KOcc"/>
-        <argument key="App\Controller\CategoryController::deleteProduct" type="service_closure" id=".service_locator.gKPBAx1"/>
-        <argument key="App\Controller\CategoryController::editProduct" type="service_closure" id=".service_locator.9N0_gnr"/>
-        <argument key="App\Controller\CategoryController::getCompositions" type="service_closure" id=".service_locator.mMH2_dX"/>
+        <argument key="App\Controller\CategoryController::deleteCategory" type="service_closure" id=".service_locator.gKPBAx1"/>
+        <argument key="App\Controller\CategoryController::editCategory" type="service_closure" id=".service_locator.9N0_gnr"/>
+        <argument key="App\Controller\CategoryController::getCategory" type="service_closure" id=".service_locator.mMH2_dX"/>
         <argument key="App\Controller\CompositionController::createComposition" type="service_closure" id=".service_locator.88kAr4A"/>
         <argument key="App\Controller\CompositionController::deleteComposition" type="service_closure" id=".service_locator.r3COkG."/>
         <argument key="App\Controller\CompositionController::getCompositions" type="service_closure" id=".service_locator.Ra1A9rw"/>
         <argument key="App\Controller\CompositionController::getProduitComposition" type="service_closure" id=".service_locator.Ra1A9rw"/>
+        <argument key="App\Controller\IngredientController::getIngredients" type="service_closure" id=".service_locator.jpMxd.y"/>
         <argument key="App\Controller\ProductController::createProduct" type="service_closure" id=".service_locator.8HCPFvB"/>
         <argument key="App\Controller\ProductController::deleteProduct" type="service_closure" id=".service_locator.OE1bLno"/>
         <argument key="App\Controller\ProductController::editProduct" type="service_closure" id=".service_locator.f0hquDx"/>
@@ -6110,13 +6128,14 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="App\Controller\CategoryController:createCategory" type="service_closure" id=".service_locator.Km2KOcc"/>
-        <argument key="App\Controller\CategoryController:deleteProduct" type="service_closure" id=".service_locator.gKPBAx1"/>
-        <argument key="App\Controller\CategoryController:editProduct" type="service_closure" id=".service_locator.9N0_gnr"/>
-        <argument key="App\Controller\CategoryController:getCompositions" type="service_closure" id=".service_locator.mMH2_dX"/>
+        <argument key="App\Controller\CategoryController:deleteCategory" type="service_closure" id=".service_locator.gKPBAx1"/>
+        <argument key="App\Controller\CategoryController:editCategory" type="service_closure" id=".service_locator.9N0_gnr"/>
+        <argument key="App\Controller\CategoryController:getCategory" type="service_closure" id=".service_locator.mMH2_dX"/>
         <argument key="App\Controller\CompositionController:createComposition" type="service_closure" id=".service_locator.88kAr4A"/>
         <argument key="App\Controller\CompositionController:deleteComposition" type="service_closure" id=".service_locator.r3COkG."/>
         <argument key="App\Controller\CompositionController:getCompositions" type="service_closure" id=".service_locator.Ra1A9rw"/>
         <argument key="App\Controller\CompositionController:getProduitComposition" type="service_closure" id=".service_locator.Ra1A9rw"/>
+        <argument key="App\Controller\IngredientController:getIngredients" type="service_closure" id=".service_locator.jpMxd.y"/>
         <argument key="App\Controller\ProductController:createProduct" type="service_closure" id=".service_locator.8HCPFvB"/>
         <argument key="App\Controller\ProductController:deleteProduct" type="service_closure" id=".service_locator.OE1bLno"/>
         <argument key="App\Controller\ProductController:editProduct" type="service_closure" id=".service_locator.f0hquDx"/>
@@ -6383,6 +6402,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.O2p6Lk7" method="withContext"/>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\IngredientController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\IngredientController"/>
+      <argument>App\Controller\IngredientController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\ProductController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ProductController"/>
       <argument>App\Controller\ProductController</argument>
@@ -6549,6 +6574,7 @@
           <argument>App\Kernel</argument>
           <argument>App\Controller\CategoryController</argument>
           <argument>App\Controller\CompositionController</argument>
+          <argument>App\Controller\IngredientController</argument>
           <argument>App\Controller\ProductController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
         </argument>
@@ -7571,7 +7597,7 @@
     <service id="ApiPlatform\Symfony\Security\ResourceAccessCheckerInterface" alias="api_platform.security.resource_access_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.zK.wY9i"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.VEj5MTV"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
@@ -7583,7 +7609,7 @@
     <service id=".service_locator.ZCBDQcD" alias=".service_locator.8HCPFvB"/>
     <service id=".service_locator.3xTJBP_" alias=".service_locator.f0hquDx"/>
     <service id=".service_locator.KQa98kb" alias=".service_locator.OE1bLno"/>
-    <service id=".service_locator.ZNVFc8V" alias=".service_locator.zK.wY9i"/>
+    <service id=".service_locator.GKFFVhk" alias=".service_locator.VEj5MTV"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.fGvEh3."/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
@@ -7660,6 +7686,7 @@
     <service id=".service_locator.By4QWvO" alias=".service_locator.Ra1A9rw"/>
     <service id=".service_locator._Tj_fZ." alias=".service_locator.88kAr4A"/>
     <service id=".service_locator.wyDqT53" alias=".service_locator.r3COkG."/>
+    <service id=".service_locator.lpNNrwI" alias=".service_locator.jpMxd.y"/>
     <service id=".service_locator.Rj5AD6T" alias=".service_locator.tK5vR04"/>
     <service id=".service_locator.72pxXVD" alias=".service_locator.TxLdxz8"/>
     <service id=".service_locator.mv0znas" alias=".service_locator.8HCPFvB"/>

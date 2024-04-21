@@ -8,11 +8,12 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
-        '/category' => [[['_route' => 'app_category_getcompositions', '_controller' => 'App\\Controller\\CategoryController::getCompositions'], null, null, null, false, false, null]],
+        '/category' => [[['_route' => 'app_category_getcategory', '_controller' => 'App\\Controller\\CategoryController::getCategory'], null, null, null, false, false, null]],
         '/category/create' => [[['_route' => 'app_category_createcategory', '_controller' => 'App\\Controller\\CategoryController::createCategory'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
-        '/category/edit' => [[['_route' => 'app_category_editproduct', '_controller' => 'App\\Controller\\CategoryController::editProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
+        '/category/edit' => [[['_route' => 'app_category_editcategory', '_controller' => 'App\\Controller\\CategoryController::editCategory'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/composition' => [[['_route' => 'app_composition_getcompositions', '_controller' => 'App\\Controller\\CompositionController::getCompositions'], null, null, null, false, false, null]],
         '/composition/create' => [[['_route' => 'app_composition_createcomposition', '_controller' => 'App\\Controller\\CompositionController::createComposition'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
+        '/ingredient' => [[['_route' => 'app_ingredient_getingredients', '_controller' => 'App\\Controller\\IngredientController::getIngredients'], null, null, null, false, false, null]],
         '/product' => [[['_route' => 'app_product_getproducts', '_controller' => 'App\\Controller\\ProductController::getProducts'], null, null, null, false, false, null]],
         '/product/create' => [[['_route' => 'app_product_createproduct', '_controller' => 'App\\Controller\\ProductController::createProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/product/edit' => [[['_route' => 'app_product_editproduct', '_controller' => 'App\\Controller\\ProductController::editProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
@@ -63,7 +64,7 @@ return [
             [['_route' => '_api_validation_errors_jsonapi', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_jsonapi'], ['id'], ['GET' => 0], null, false, true, null],
         ],
         250 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        286 => [[['_route' => 'app_category_deleteproduct', '_controller' => 'App\\Controller\\CategoryController::deleteProduct'], ['id'], null, null, false, true, null]],
+        286 => [[['_route' => 'app_category_deletecategory', '_controller' => 'App\\Controller\\CategoryController::deleteCategory'], ['id'], null, null, false, true, null]],
         316 => [[['_route' => 'app_composition_getproduitcomposition', '_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id'], null, null, false, true, null]],
         339 => [[['_route' => 'app_composition_deletecomposition', '_controller' => 'App\\Controller\\CompositionController::deleteComposition'], ['id'], null, null, false, true, null]],
         369 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
