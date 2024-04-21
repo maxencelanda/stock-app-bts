@@ -6,6 +6,9 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -16,11 +19,12 @@ class Category
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['product'])]
     private ?string $name = null;
 
     /**
      * @var Collection<int, Product>
-     */
+    */
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'idCategory')]
     private Collection $products;
 

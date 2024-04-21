@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CompositionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CompositionRepository::class)]
 class Composition
@@ -11,14 +12,17 @@ class Composition
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['compositions'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['compositions'])]
     private ?Product $idProduct = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['compositions'])]
     private ?Ingredient $idIngredient = null;
 
     public function getId(): ?int
