@@ -386,6 +386,13 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Controller\CategoryController" class="App\Controller\CategoryController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.O2p6Lk7.App\Controller\CategoryController"/>
+      </call>
+    </service>
     <service id="App\Controller\CompositionController" class="App\Controller\CompositionController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -450,7 +457,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.aAx4Aiu"/>
+      <argument type="service" id=".service_locator.zK.wY9i"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -1904,7 +1911,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.aAx4Aiu"/>
+      <argument type="service" id=".service_locator.zK.wY9i"/>
     </service>
     <service id="routing.resolver" class="Symfony\Component\Config\Loader\LoaderResolver">
       <call method="addLoader">
@@ -5537,6 +5544,9 @@
     <service id="doctrine.fixtures.purger.orm_purger_factory" class="Doctrine\Bundle\FixturesBundle\Purger\ORMPurgerFactory">
       <tag name="doctrine.fixtures.purger_factory" alias="default"/>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CompositionController" class="App\Controller\CompositionController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CompositionController" class="App\Controller\CompositionController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CompositionController" class="App\Controller\CompositionController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -5992,6 +6002,34 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.mMH2_dX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categoryRepository" type="service_closure" id="App\Repository\CategoryRepository"/>
+        <argument key="serializer" type="service_closure" id="serializer"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Km2KOcc" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+        <argument key="serializer" type="service_closure" id="serializer"/>
+      </argument>
+    </service>
+    <service id=".service_locator.9N0_gnr" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categoryRepository" type="service_closure" id="App\Repository\CategoryRepository"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
+    <service id=".service_locator.gKPBAx1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="category" type="service_closure" id=".errored..service_locator.gKPBAx1.App\Entity\Category"/>
+        <argument key="em" type="service_closure" id="doctrine.orm.default_entity_manager"/>
+      </argument>
+    </service>
     <service id=".service_locator.Ra1A9rw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6051,9 +6089,13 @@
         <argument key="product" type="service_closure" id=".errored..service_locator.OE1bLno.App\Entity\Product"/>
       </argument>
     </service>
-    <service id=".service_locator.aAx4Aiu" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.zK.wY9i" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\CategoryController::createCategory" type="service_closure" id=".service_locator.Km2KOcc"/>
+        <argument key="App\Controller\CategoryController::deleteProduct" type="service_closure" id=".service_locator.gKPBAx1"/>
+        <argument key="App\Controller\CategoryController::editProduct" type="service_closure" id=".service_locator.9N0_gnr"/>
+        <argument key="App\Controller\CategoryController::getCompositions" type="service_closure" id=".service_locator.mMH2_dX"/>
         <argument key="App\Controller\CompositionController::createComposition" type="service_closure" id=".service_locator.88kAr4A"/>
         <argument key="App\Controller\CompositionController::deleteComposition" type="service_closure" id=".service_locator.r3COkG."/>
         <argument key="App\Controller\CompositionController::getCompositions" type="service_closure" id=".service_locator.Ra1A9rw"/>
@@ -6067,6 +6109,10 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
+        <argument key="App\Controller\CategoryController:createCategory" type="service_closure" id=".service_locator.Km2KOcc"/>
+        <argument key="App\Controller\CategoryController:deleteProduct" type="service_closure" id=".service_locator.gKPBAx1"/>
+        <argument key="App\Controller\CategoryController:editProduct" type="service_closure" id=".service_locator.9N0_gnr"/>
+        <argument key="App\Controller\CategoryController:getCompositions" type="service_closure" id=".service_locator.mMH2_dX"/>
         <argument key="App\Controller\CompositionController:createComposition" type="service_closure" id=".service_locator.88kAr4A"/>
         <argument key="App\Controller\CompositionController:deleteComposition" type="service_closure" id=".service_locator.r3COkG."/>
         <argument key="App\Controller\CompositionController:getCompositions" type="service_closure" id=".service_locator.Ra1A9rw"/>
@@ -6325,6 +6371,12 @@
         <argument key="web_link.http_header_serializer" type="service_closure" id="web_link.http_header_serializer" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.O2p6Lk7.App\Controller\CategoryController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CategoryController"/>
+      <argument>App\Controller\CategoryController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.O2p6Lk7" method="withContext"/>
+    </service>
     <service id=".service_locator.O2p6Lk7.App\Controller\CompositionController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\CompositionController"/>
       <argument>App\Controller\CompositionController</argument>
@@ -6495,6 +6547,7 @@
       <call method="allowControllers">
         <argument type="collection">
           <argument>App\Kernel</argument>
+          <argument>App\Controller\CategoryController</argument>
           <argument>App\Controller\CompositionController</argument>
           <argument>App\Controller\ProductController</argument>
           <argument>Doctrine\Bundle\DoctrineBundle\Controller\ProfilerController</argument>
@@ -6594,6 +6647,9 @@
     </service>
     <service id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.y4_Zrx.&quot;: it needs an instance of &quot;Symfony\Component\Config\Loader\LoaderInterface&quot; but this type has been excluded from autowiring."/>
+    </service>
+    <service id=".errored..service_locator.gKPBAx1.App\Entity\Category" class="App\Entity\Category">
+      <tag name="container.error" message="Cannot autowire service &quot;.service_locator.gKPBAx1&quot;: it needs an instance of &quot;App\Entity\Category&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
     </service>
     <service id=".errored..service_locator.r3COkG..App\Entity\Composition" class="App\Entity\Composition">
       <tag name="container.error" message="Cannot autowire service &quot;.service_locator.r3COkG.&quot;: it needs an instance of &quot;App\Entity\Composition&quot; but this type has been excluded in &quot;config/services.yaml&quot;."/>
@@ -7515,18 +7571,19 @@
     <service id="ApiPlatform\Symfony\Security\ResourceAccessCheckerInterface" alias="api_platform.security.resource_access_checker"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.aAx4Aiu"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.zK.wY9i"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="api_platform.name_converter" alias="serializer.name_converter.metadata_aware"/>
     <service id="Psr\Log\LoggerInterface" alias="logger"/>
     <service id=".service_locator.bnaLdkn" alias="api_platform.serializer_locator"/>
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
+    <service id=".service_locator.gIH_jK9" alias=".service_locator.9N0_gnr"/>
     <service id=".service_locator.oZxLJID" alias=".service_locator.88kAr4A"/>
     <service id=".service_locator.ZCBDQcD" alias=".service_locator.8HCPFvB"/>
     <service id=".service_locator.3xTJBP_" alias=".service_locator.f0hquDx"/>
     <service id=".service_locator.KQa98kb" alias=".service_locator.OE1bLno"/>
-    <service id=".service_locator.y4Ty8Jh" alias=".service_locator.aAx4Aiu"/>
+    <service id=".service_locator.ZNVFc8V" alias=".service_locator.zK.wY9i"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.fGvEh3."/>
     <service id=".service_locator.LMuqDDe" alias=".service_locator.VHsrTPK"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
@@ -7596,6 +7653,10 @@
     <service id="api_platform.metadata.resource.metadata_collection_factory.cached.inner" alias="api_platform.doctrine.orm.metadata.resource.metadata_collection_factory"/>
     <service id=".service_locator.Xbsa8iG" alias="api_platform.filter_locator"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
+    <service id=".service_locator.P1SiPK0" alias=".service_locator.mMH2_dX"/>
+    <service id=".service_locator.YdjP9oZ" alias=".service_locator.Km2KOcc"/>
+    <service id=".service_locator.XXPZjgN" alias=".service_locator.9N0_gnr"/>
+    <service id=".service_locator.PRet2hw" alias=".service_locator.gKPBAx1"/>
     <service id=".service_locator.By4QWvO" alias=".service_locator.Ra1A9rw"/>
     <service id=".service_locator._Tj_fZ." alias=".service_locator.88kAr4A"/>
     <service id=".service_locator.wyDqT53" alias=".service_locator.r3COkG."/>

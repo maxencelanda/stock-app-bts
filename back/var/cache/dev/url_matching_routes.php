@@ -8,6 +8,9 @@
 return [
     false, // $matchHost
     [ // $staticRoutes
+        '/category' => [[['_route' => 'app_category_getcompositions', '_controller' => 'App\\Controller\\CategoryController::getCompositions'], null, null, null, false, false, null]],
+        '/category/create' => [[['_route' => 'app_category_createcategory', '_controller' => 'App\\Controller\\CategoryController::createCategory'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
+        '/category/edit' => [[['_route' => 'app_category_editproduct', '_controller' => 'App\\Controller\\CategoryController::editProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/composition' => [[['_route' => 'app_composition_getcompositions', '_controller' => 'App\\Controller\\CompositionController::getCompositions'], null, null, null, false, false, null]],
         '/composition/create' => [[['_route' => 'app_composition_createcomposition', '_controller' => 'App\\Controller\\CompositionController::createComposition'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/product' => [[['_route' => 'app_product_getproducts', '_controller' => 'App\\Controller\\ProductController::getProducts'], null, null, null, false, false, null]],
@@ -31,13 +34,16 @@ return [
                     .')'
                 .')'
                 .'|/_error/(\\d+)(?:\\.([^/]++))?(*:250)'
-                .'|/composition/(?'
-                    .'|([0-9]+)(*:282)'
-                    .'|delete/([0-9]+)(*:305)'
+                .'|/c(?'
+                    .'|ategory/delete/([0-9]+)(*:286)'
+                    .'|omposition/(?'
+                        .'|([0-9]+)(*:316)'
+                        .'|delete/([0-9]+)(*:339)'
+                    .')'
                 .')'
                 .'|/product/(?'
-                    .'|([0-9]+)(*:334)'
-                    .'|delete/([0-9]+)(*:357)'
+                    .'|([0-9]+)(*:369)'
+                    .'|delete/([0-9]+)(*:392)'
                 .')'
             .')/?$}sDu',
     ],
@@ -57,10 +63,11 @@ return [
             [['_route' => '_api_validation_errors_jsonapi', '_controller' => 'api_platform.symfony.main_controller', '_format' => null, '_stateless' => true, '_api_resource_class' => 'ApiPlatform\\Symfony\\Validator\\Exception\\ValidationException', '_api_operation_name' => '_api_validation_errors_jsonapi'], ['id'], ['GET' => 0], null, false, true, null],
         ],
         250 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        282 => [[['_route' => 'app_composition_getproduitcomposition', '_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id'], null, null, false, true, null]],
-        305 => [[['_route' => 'app_composition_deletecomposition', '_controller' => 'App\\Controller\\CompositionController::deleteComposition'], ['id'], null, null, false, true, null]],
-        334 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
-        357 => [
+        286 => [[['_route' => 'app_category_deleteproduct', '_controller' => 'App\\Controller\\CategoryController::deleteProduct'], ['id'], null, null, false, true, null]],
+        316 => [[['_route' => 'app_composition_getproduitcomposition', '_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id'], null, null, false, true, null]],
+        339 => [[['_route' => 'app_composition_deletecomposition', '_controller' => 'App\\Controller\\CompositionController::deleteComposition'], ['id'], null, null, false, true, null]],
+        369 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
+        392 => [
             [['_route' => 'app_product_deleteproduct', '_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
