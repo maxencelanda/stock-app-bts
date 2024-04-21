@@ -1,4 +1,3 @@
-import {API_URL} from "@env"
 import { useEffect, useState } from "react";
 import {
 	Button,
@@ -11,7 +10,7 @@ import {
 	Modal,
 } from "react-native";
 const axios = require('axios').default;
-axios.defaults.baseURL = 'http://192.168.1.18:8080';
+const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
 const Read = ({ navigation }) => {
 	const [produit, setProduit] = useState();
@@ -21,7 +20,7 @@ const Read = ({ navigation }) => {
 
 	//Fetch products
 	useEffect(() => {
-		axios.get(`${API_URL}/product`)
+		axios.get(apiUrl+'/product')
 		.then(function(response){
 			console.log(response.data)
 			setProduit(response.data)

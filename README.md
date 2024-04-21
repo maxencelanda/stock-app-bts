@@ -8,6 +8,8 @@
 
 ```composer install```
 
+``npm i babel-preset-expo``
+
 # Run
 
 - Ouvrir XAMP, start Apache et MySQL
