@@ -1,3 +1,4 @@
+import {API_URL} from "@env"
 import { useEffect, useState } from "react";
 import {
 	Button,
@@ -9,26 +10,38 @@ import {
 	Alert,
 	Modal,
 } from "react-native";
+const axios = require('axios').default;
+axios.defaults.baseURL = 'http://192.168.1.18:8080';
 
 const Read = ({ navigation }) => {
-	const Data = [
-		{
-			id: "1",
-			categorie: "Mexique",
-			nom: "Tacos",
-			quantite: 10,
-			prix: 5,
-		},
-		{
-			id: "2",
-			categorie: "USA",
-			nom: "Hamburger",
-			quantite: 5,
-			prix: 10,
-		},
-	];
-	const [produit, setProduit] = useState(Data);
+	const [produit, setProduit] = useState();
+	const [productIdToDelete, setproductIdToDelete] = useState();
+	const [deleteProduct, setDeleteProduct] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
+
+	//Fetch products
+	useEffect(() => {
+		axios.get(`${API_URL}/product`)
+		.then(function(response){
+			console.log(response.data)
+			setProduit(response.data)
+			}
+		).catch(function(error){
+			console.log(error)
+		})
+	}, []);
+
+/*	// Delete the product onPress
+	useEffect(() => {
+		axios.post('/product/delete/'+productIdToDelete)
+		.then(function (response) {
+			console.log(response);
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}, [deleteProduct,productIdToDelete])*/
+
 
 	const Details = () => {
 		return (
@@ -63,7 +76,10 @@ const Read = ({ navigation }) => {
 						<Pressable style={style.button} onPress={() => setModalVisible(!modalVisible)}>
 							<Text style={style.textStyle}>Modifier</Text>
 						</Pressable>
-						<Pressable onPress={() => navigation.navigate("Home")} style={style.button}>
+						<Pressable onPress={() => {
+							setproductIdToDelete(id);
+							setDeleteProduct(true);
+						}} style={style.button}>
 							<Text style={style.textStyle}>Supprimer</Text>
 						</Pressable>
 					</View>
@@ -86,10 +102,10 @@ const Read = ({ navigation }) => {
 				renderItem={({ item }) => (
 					<Produits
 						id={item.id}
-						categorie={item.categorie}
-						nom={item.nom}
-						quantite={item.quantite}
-						prix={item.prix}
+						categorie={item.idCategory.name}
+						nom={item.name}
+						quantite={item.quantity}
+						prix={item.price}
 					/>
 				)}
 				keyExtractor={(item) => item.id}

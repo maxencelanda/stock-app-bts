@@ -15,6 +15,7 @@
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.29",
+    "axios": "^1.6.8",
     "expo": "~50.0.8",
     "expo-status-bar": "~1.11.1",
     "expo-updates": "~0.24.12",
@@ -27,7 +28,8 @@
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.11"
   },
   "private": true
 }
