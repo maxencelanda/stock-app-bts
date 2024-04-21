@@ -2,8 +2,13 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Composition;
 use App\Entity\Product;
 use App\Repository\CompositionRepository;
+use App\Repository\IngredientRepository;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,4 +35,26 @@ class CompositionController extends AbstractController
         return new JsonResponse($compositionsJson, Response::HTTP_OK, [], true);
     }
     
+
+    #[Route('/composition/create', methods: ["POST", "GET"])]
+    public function createComposition(Request $request, EntityManagerInterface $em, SerializerInterface $serializer, ProductRepository $productRepository, IngredientRepository $ingredientRepository)
+    {
+        $compositionData = json_decode($request->getContent(), true);
+        $product = $productRepository->find($compositionData["idProduct"]["id"]);
+        $ingredient = $ingredientRepository->find($compositionData["idIngredient"]["id"]);
+        $composition = $serializer->deserialize($request->getContent(), Composition::class, 'json');
+        $composition->setIdProduct($product);
+        $composition->setIdIngredient($ingredient);
+        $em->persist($composition);
+        $em->flush();
+        return $this->json($composition, Response::HTTP_OK, [], ['groups' => ['compositions']]);
+    }
+
+    #[Route('/composition/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
+    public function deleteComposition(Composition $composition, EntityManagerInterface $em)
+    {
+        $em->remove($composition);
+        $em->flush();
+        return $this->json($composition, Response::HTTP_OK, [], ['groups' => ['product']]);
+    }
 }

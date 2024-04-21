@@ -35,6 +35,20 @@ class CompositionRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * @return Composition[] Returns an array of Composition objects
+     */
+    public function findByIngredient($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c')
+            ->andWhere('c.idIngredient = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    public function findOneBySomeField($value): ?Composition
     //    {
     //        return $this->createQueryBuilder('c')

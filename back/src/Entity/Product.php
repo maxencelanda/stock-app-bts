@@ -13,7 +13,7 @@ class Product
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['product'])]
+    #[Groups(['product', 'compositions'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
