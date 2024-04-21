@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Entity\Product;
 use App\Repository\CategoryRepository;
+use App\Repository\CompositionRepository;
+use App\Repository\IngredientRepository;
+use App\Repository\IngredientStockRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,10 +64,20 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
-    public function deleteProduct(Product $product, EntityManagerInterface $em)
+    public function deleteProduct(Product $product, EntityManagerInterface $em, CompositionRepository $compositionRepository)
     {
+        $compositions = $compositionRepository->findByProduct($product->getId());
+        foreach($compositions as $compo){
+            $em->remove($compo);
+        }
         $em->remove($product);
         $em->flush();
+        return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
+    }
+
+    #[Route('/product/date/{id}', requirements: ["id" => Requirement::DIGITS])]
+    public function getProductDateExp(Product $product, CompositionRepository $compositionRepository, IngredientStockRepository $ingredientStockRepository)
+    {
         return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }
 }
