@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+
+import { View, TextInput, Button, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Linking } from 'react-native';
+
+
 
 
 const RegisterScreen = ({navigation}) => {
@@ -34,9 +38,11 @@ const RegisterScreen = ({navigation}) => {
           <Text style={{color: '#fff'}}>S'inscrire</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.loginText}>Déjà un compte ? Connectez-vous</Text>
-      </TouchableOpacity>
+
+      <Text style={{color: 'purple'}}
+      onPress={() => Linking.openURL('/LoginScreen')}>
+      Vous avez déjà un compte ? Connectez vous
+      </Text>
     </View>
   );
 };
