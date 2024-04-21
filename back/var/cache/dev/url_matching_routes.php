@@ -14,6 +14,8 @@ return [
         '/composition' => [[['_route' => 'app_composition_getcompositions', '_controller' => 'App\\Controller\\CompositionController::getCompositions'], null, null, null, false, false, null]],
         '/composition/create' => [[['_route' => 'app_composition_createcomposition', '_controller' => 'App\\Controller\\CompositionController::createComposition'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/ingredient' => [[['_route' => 'app_ingredient_getingredients', '_controller' => 'App\\Controller\\IngredientController::getIngredients'], null, null, null, false, false, null]],
+        '/ingredient/create' => [[['_route' => 'app_ingredient_createingredient', '_controller' => 'App\\Controller\\IngredientController::createIngredient'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
+        '/ingredient/edit' => [[['_route' => 'app_ingredient_editingredient', '_controller' => 'App\\Controller\\IngredientController::editIngredient'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/product' => [[['_route' => 'app_product_getproducts', '_controller' => 'App\\Controller\\ProductController::getProducts'], null, null, null, false, false, null]],
         '/product/create' => [[['_route' => 'app_product_createproduct', '_controller' => 'App\\Controller\\ProductController::createProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/product/edit' => [[['_route' => 'app_product_editproduct', '_controller' => 'App\\Controller\\ProductController::editProduct'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
@@ -42,9 +44,13 @@ return [
                         .'|delete/([0-9]+)(*:339)'
                     .')'
                 .')'
+                .'|/ingredient/(?'
+                    .'|([0-9]+)(*:372)'
+                    .'|delete/([0-9]+)(*:395)'
+                .')'
                 .'|/product/(?'
-                    .'|([0-9]+)(*:369)'
-                    .'|delete/([0-9]+)(*:392)'
+                    .'|([0-9]+)(*:424)'
+                    .'|delete/([0-9]+)(*:447)'
                 .')'
             .')/?$}sDu',
     ],
@@ -67,8 +73,10 @@ return [
         286 => [[['_route' => 'app_category_deletecategory', '_controller' => 'App\\Controller\\CategoryController::deleteCategory'], ['id'], null, null, false, true, null]],
         316 => [[['_route' => 'app_composition_getproduitcomposition', '_controller' => 'App\\Controller\\CompositionController::getProduitComposition'], ['id'], null, null, false, true, null]],
         339 => [[['_route' => 'app_composition_deletecomposition', '_controller' => 'App\\Controller\\CompositionController::deleteComposition'], ['id'], null, null, false, true, null]],
-        369 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
-        392 => [
+        372 => [[['_route' => 'app_ingredient_getproduct', '_controller' => 'App\\Controller\\IngredientController::getProduct'], ['id'], null, null, false, true, null]],
+        395 => [[['_route' => 'app_ingredient_deleteingredient', '_controller' => 'App\\Controller\\IngredientController::deleteIngredient'], ['id'], null, null, false, true, null]],
+        424 => [[['_route' => 'app_product_getproduct', '_controller' => 'App\\Controller\\ProductController::getProduct'], ['id'], null, null, false, true, null]],
+        447 => [
             [['_route' => 'app_product_deleteproduct', '_controller' => 'App\\Controller\\ProductController::deleteProduct'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
