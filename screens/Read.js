@@ -17,6 +17,7 @@ const Read = ({ navigation }) => {
 	const [productIdToDelete, setproductIdToDelete] = useState();
 	const [deleteProduct, setDeleteProduct] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
+	const [loading, setLoading] = useState(true)
 
 	//Fetch products
 	useEffect(() => {
@@ -24,23 +25,26 @@ const Read = ({ navigation }) => {
 		.then(function(response){
 			console.log(response.data)
 			setProduit(response.data)
+			setLoading(false)
 			}
 		).catch(function(error){
 			console.log(error)
 		})
-	}, []);
+	}, [loading]);
 
-/*	// Delete the product onPress
+	// Delete the product onPress
 	useEffect(() => {
-		axios.post('/product/delete/'+productIdToDelete)
+		axios.post(apiUrl+'/product/delete/'+productIdToDelete)
 		.then(function (response) {
+			setLoading(true)
+			setproductIdToDelete(false)
+			setDeleteProduct(false)
 			console.log(response);
 		})
 		.catch(function (error) {
 			console.log(error);
 		});
-	}, [deleteProduct,productIdToDelete])*/
-
+	}, [deleteProduct])
 
 	const Details = () => {
 		return (
@@ -66,24 +70,28 @@ const Read = ({ navigation }) => {
 					animationType="slide"
 					transparent={true}
 					visible={modalVisible}
-					onRequestClose={() => {
-						setModalVisible(!modalVisible);
-					}}
 				>
 					<View style={style.modalView}>
-						<Text>Modifier ou Supprimer :{id}</Text>
+						<Text>Modifier ou Supprimer : {productIdToDelete}</Text>
 						<Pressable style={style.button} onPress={() => setModalVisible(!modalVisible)}>
 							<Text style={style.textStyle}>Modifier</Text>
 						</Pressable>
 						<Pressable onPress={() => {
-							setproductIdToDelete(id);
-							setDeleteProduct(true);
+							setModalVisible(!modalVisible);
+							setDeleteProduct(true)
 						}} style={style.button}>
 							<Text style={style.textStyle}>Supprimer</Text>
 						</Pressable>
+						<Pressable style={style.button} onPress={()=> setModalVisible(false)}>
+							<Text style={style.textStyle}>Retour arriere</Text>
+						</Pressable>
 					</View>
 				</Modal>
-				<Pressable onPress={() => setModalVisible(true)}>
+				<Pressable onPress={() => {
+					setModalVisible(true);
+					setproductIdToDelete(id)
+				}
+				}>
 					<Text style={{ padding: 5, color:"blue" }}>Details</Text>
 				</Pressable>
 			</View>
@@ -95,20 +103,25 @@ const Read = ({ navigation }) => {
 				title="Add in stock"
 				onPress={() => navigation.navigate("Create")}
 			/>
+
 			<Details />
-			<FlatList
-				data={produit}
-				renderItem={({ item }) => (
-					<Produits
-						id={item.id}
-						categorie={item.idCategory.name}
-						nom={item.name}
-						quantite={item.quantity}
-						prix={item.price}
-					/>
-				)}
-				keyExtractor={(item) => item.id}
-			></FlatList>
+			{loading ? (
+				<Text>Chargement des produits en cours...</Text>
+			) : (
+				<FlatList
+					data={produit}
+					renderItem={({ item }) => (
+						<Produits
+							id={item.id}
+							categorie={item.idCategory.name}
+							nom={item.name}
+							quantite={item.quantity}
+							prix={item.price}
+						/>
+					)}
+					keyExtractor={(item) => item.id}
+				/>
+			)}
 		</View>
 	);
 };
