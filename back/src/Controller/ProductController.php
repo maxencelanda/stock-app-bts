@@ -75,6 +75,7 @@ class ProductController extends AbstractController
         return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }
 
+
     #[Route('/product/date/{id}', requirements: ["id" => Requirement::DIGITS])]
     public function getProductDateExp(Product $product, CompositionRepository $compositionRepository, IngredientStockRepository $ingredientStockRepository)
     {

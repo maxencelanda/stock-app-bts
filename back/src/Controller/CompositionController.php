@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Composition;
 use App\Entity\Product;
 use App\Repository\CompositionRepository;
@@ -34,6 +35,7 @@ class CompositionController extends AbstractController
         return new JsonResponse($compositionsJson, Response::HTTP_OK, [], true);
     }
     
+
     #[Route('/composition/create', methods: ["POST", "GET"])]
     public function createComposition(Request $request, EntityManagerInterface $em, SerializerInterface $serializer, ProductRepository $productRepository, IngredientRepository $ingredientRepository)
     {
