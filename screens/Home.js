@@ -1,9 +1,23 @@
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 import { auth } from '../firebase'
+import { platCollection } from '../firestore'
+import { getAuth } from 'firebase/auth'
+
 
 export default function Home ({ userEmail, navigation }) {
   console.log('user received: ' + userEmail)
-  
+
+const auth = getAuth();
+const handleSignOut = () => {
+  signOut(auth)
+    .then(() => {
+      console.log('Déconnexion réussie');
+    })
+    .catch((error) => {
+      console.error('Erreur lors de la déconnexion : ', error);
+    });
+};
+
   return (
     <View>
         <Text style={styles.title}>ACME STOCK</Text>
@@ -12,16 +26,24 @@ export default function Home ({ userEmail, navigation }) {
         <Button title={"Voir les ingredients"} onPress={()=>navigation.navigate("ReadIngredient")}/>
         <Button title={"Voir les compositions"} onPress={()=> navigation.navigate("ReadComposition")}/>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+
   title: {
-    backgroundColor: "#F0F6CA",
-    textAlign: "center",
+    backgroundColor: '#F0F6CA',
+    textAlign: 'center',
     paddingTop: 15,
     paddingBottom: 15,
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
+    marginBottom: 20,
   },
 });
