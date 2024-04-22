@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
+use App\Repository\CompositionRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,8 +47,16 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/category/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
-    public function deleteCategory(Category $category, EntityManagerInterface $em)
+    public function deleteCategory(Category $category, EntityManagerInterface $em, ProductRepository $productRepository, CompositionRepository $compositionRepository)
     {
+        $produits = $productRepository->findByCategory($category->getId());
+        foreach($produits as $produit){
+            $compositions = $compositionRepository->findByProduct($produit->getId());
+            foreach($compositions as $compo){
+                $em->remove($compo);
+            }
+            $em->remove($produit);
+        }
         $em->remove($category);
         $em->flush();
         return $this->json($category, Response::HTTP_OK, [], ['groups' => ['categories']]);
