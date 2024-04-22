@@ -46,7 +46,7 @@ export default function App() {
         )}
         <Stack.Screen options={{ headerShown: false }} name='Register' component={RegisterScreen}/>
         <Stack.Screen options={{ headerShown: false }} name='Read' component={Read}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name='Create' component={Create}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name='CreateProduct' component={CreateProduct}></Stack.Screen>
       </Stack.Navigator>
       </View>
     </NavigationContainer>
@@ -55,11 +55,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <View style={styles.container}>
-      <Header/>
       <Stack.Navigator initialRouteName='LoginScreen'>
         {user ? (
           <Stack.Screen options={{ headerShown: false }} name='Home'>
-            {props => <Home {...props} userEmail={user.email} />}
+            {props => <>
+              <Header/>
+              <Home {...props} userEmail={user.email} />
+            </>}
           </Stack.Screen>
         ) : (
           <Stack.Screen options={{ headerShown: false }} name='Login' component={LoginScreen} />
@@ -85,6 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    marginTop: 30,
     backgroundColor: '#fff',
   },
 });
