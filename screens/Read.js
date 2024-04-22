@@ -109,13 +109,10 @@ const Read = ({ navigation }) => {
 
 			<View style={style.alignVertical}>
 			<Button
-				title="Add product"
+				title="Ajouter un produit"
 				onPress={() => navigation.navigate("CreateProduct")}
 			/>
-			<Button
-				title="Add category"
-				onPress={() => navigation.navigate("CreateProduct")}
-			/>
+
 			</View>
 			<Details />
 			{loading ? (

@@ -1,6 +1,5 @@
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 import { auth } from '../firebase'
-import { platCollection } from '../firestore'
 
 export default function Home ({ userEmail, navigation }) {
   console.log('user received: ' + userEmail)
@@ -8,10 +7,10 @@ export default function Home ({ userEmail, navigation }) {
   return (
     <View>
         <Text style={styles.title}>ACME STOCK</Text>
-        <Text>Logged in as {userEmail}</Text>
-        <Text>{platCollection}</Text>
-        <Button title="Go to Read" onPress={() => navigation.navigate("Read")} />
-        <Button title="Create products" onPress={()=> navigation.navigate("CreateProduct")}/>
+        <Button title="Voir les produits" onPress={() => navigation.navigate("Read")} />
+        <Button title={"Voir les categories"} onPress={()=> navigation.navigate("ReadCategory")}/>
+        <Button title={"Voir les ingredients"} onPress={()=>navigation.navigate("ReadIngredient")}/>
+        <Button title={"Voir les compositions"} onPress={()=> navigation.navigate("ReadComposition")}/>
     </View>
   )
 }

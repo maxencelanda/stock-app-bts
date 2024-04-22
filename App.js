@@ -12,6 +12,9 @@ import { onAuthStateChanged } from 'firebase/auth'
 import {firebase_auth} from "./firebase";
 import RegisterScreen from "./screens/RegisterScreen";
 import ModifyProduct from "./screens/ModifyProduct";
+import CreateCategory from "./screens/CreateCategory";
+import ReadCategory from "./screens/ReadCategory";
+import ModifyCategory from "./screens/ModifyCategory";
 
 const Stack = createNativeStackNavigator()
 
@@ -39,6 +42,9 @@ export default function App() {
         <Stack.Screen name='Read' component={Read}></Stack.Screen>
         <Stack.Screen name='CreateProduct' component={CreateProduct}></Stack.Screen>
         <Stack.Screen name='ModifyProduct' component={ModifyProduct}></Stack.Screen>
+        <Stack.Screen name={'CreateCategory'} component={CreateCategory}></Stack.Screen>
+        <Stack.Screen name={'ReadCategory'} component={ReadCategory}></Stack.Screen>
+        <Stack.Screen name={'ModifyCategory'} component={ModifyCategory}></Stack.Screen>
        </Stack.Navigator>
     </NavigationContainer>
   )
