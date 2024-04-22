@@ -19,14 +19,12 @@ const handleSignOut = () => {
 };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>ACME STOCK</Text>
-      <Text>Connecté en tant que {userEmail}</Text>
-      <Button
-          title="Go to READ"
-          onPress={() => navigation.navigate('Read')}
-          style={styles.button}
-        />
+    <View>
+        <Text style={styles.title}>ACME STOCK</Text>
+        <Button title="Voir les produits" onPress={() => navigation.navigate("Read")} />
+        <Button title={"Voir les categories"} onPress={()=> navigation.navigate("ReadCategory")}/>
+        <Button title={"Voir les ingredients"} onPress={()=>navigation.navigate("ReadIngredient")}/>
+        <Button title={"Voir les compositions"} onPress={()=> navigation.navigate("ReadComposition")}/>
     </View>
   );
 }

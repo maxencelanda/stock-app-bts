@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 	Pressable,
 	Alert,
-	Modal,
+	Modal, SafeAreaView, ScrollView,
 } from "react-native";
 const axios = require('axios').default;
 const apiUrl = process.env.EXPO_PUBLIC_API_URL
@@ -23,9 +23,11 @@ const Read = ({ navigation }) => {
 	useEffect(() => {
 		axios.get(apiUrl+'/product')
 		.then(function(response){
-			console.log(response.data)
-			setProduit(response.data)
-			setLoading(false)
+			if(loading === true){
+				console.log(response.data)
+				setProduit(response.data)
+				setLoading(false)
+			}
 			}
 		).catch(function(error){
 			console.log(error)
@@ -36,9 +38,11 @@ const Read = ({ navigation }) => {
 	useEffect(() => {
 		axios.post(apiUrl+'/product/delete/'+productIdToDelete)
 		.then(function (response) {
-			setLoading(true)
-			setproductIdToDelete(false)
-			setDeleteProduct(false)
+			if(deleteProduct){
+				setLoading(true)
+				setproductIdToDelete(false)
+				setDeleteProduct(false)
+			}
 			console.log(response);
 		})
 		.catch(function (error) {
@@ -60,6 +64,7 @@ const Read = ({ navigation }) => {
 	};
 	const Produits = ({ id, nom, categorie, quantite, prix }) => {
 		return (
+			<ScrollView>
 			<View style={style.produits}>
 				<Text style={{ padding: 5 }}>{id}</Text>
 				<Text style={{ padding: 5 }}>{categorie}</Text>
@@ -73,7 +78,8 @@ const Read = ({ navigation }) => {
 				>
 					<View style={style.modalView}>
 						<Text>Modifier ou Supprimer : {productIdToDelete}</Text>
-						<Pressable style={style.button} onPress={() => setModalVisible(!modalVisible)}>
+						<Pressable style={style.button} onPress={() => {setModalVisible(!modalVisible),
+							navigation.navigate('ModifyProduct', {id: productIdToDelete})}}>
 							<Text style={style.textStyle}>Modifier</Text>
 						</Pressable>
 						<Pressable onPress={() => {
@@ -95,15 +101,19 @@ const Read = ({ navigation }) => {
 					<Text style={{ padding: 5, color:"blue" }}>Details</Text>
 				</Pressable>
 			</View>
+			</ScrollView>
 		);
 	};
 	return (
-		<View style={style.container}>
+		<SafeAreaView style={style.container}>
+
+			<View style={style.alignVertical}>
 			<Button
-				title="Add in stock"
-				onPress={() => navigation.navigate("Create")}
+				title="Ajouter un produit"
+				onPress={() => navigation.navigate("CreateProduct")}
 			/>
 
+			</View>
 			<Details />
 			{loading ? (
 				<Text>Chargement des produits en cours...</Text>
@@ -122,7 +132,7 @@ const Read = ({ navigation }) => {
 					keyExtractor={(item) => item.id}
 				/>
 			)}
-		</View>
+		</SafeAreaView>
 	);
 };
 const style = StyleSheet.create({
@@ -137,6 +147,9 @@ const style = StyleSheet.create({
 		justifyContent: "space-around",
 		borderBottomWidth: 1,
 		padding:3,
+	},
+	alignVertical: {
+		flexDirection: "row",
 	},
 	//css du modal, rien à foutre cest copilot qui la fait
 	modalView: {
