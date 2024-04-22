@@ -6,11 +6,16 @@
 
 ``npm install axios``
 
+``Faire ip config pour savoir son adresse Ipv4``
+
+``Faire un fichier .env ou on met : EXPO_PUBLIC_API_URL=http://AdresseIP:Port``
+
 ```cd /back```
 
 ```composer install```
 
 ``npm i babel-preset-expo``
+
 
 
 # Run
