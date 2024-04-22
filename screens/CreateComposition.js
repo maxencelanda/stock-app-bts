@@ -7,17 +7,21 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
 const CreateComposition = ({navigation}) => {
 	const [productName, setProductName] = useState('')
-    const [categoryName, setCategoryName] = useState();
+    const [IngredientName, setIngredientName] = useState();
+    const [IngredientId, setIngredientId] = useState();
+    const [productId, setProductId] = useState();
 	const [Envoi, setEnvoi] = useState(false)
-	const [FetchIngredient, setFetchIngredient] = useState(true)
+    const [FetchIngredient, setFetchIngredient] = useState(true)
+    const [FetchProduct, setFetchProduct] = useState(true)
     const [Ingredient, setIngredient] = useState()
+    const [Product, setProduct] = useState()
 
 	// fetch les ingredients
 	useEffect(() => {
 		if (FetchIngredient) {
 			axios.get(apiUrl + '/ingredient')
 			.then(function (response) {
-					setCategory(response.data.map(category => category.name))
+                    setIngredient(response.data.map(ingredient => ingredient.name))
 				}
 			).catch(function (error) {
 				console.log(error)
@@ -25,17 +29,33 @@ const CreateComposition = ({navigation}) => {
 			setFetchIngredient(false)
 		}
     }, [FetchIngredient])
+
+    // fetch les produits
+	useEffect(() => {
+		if (FetchProduct) {
+			axios.get(apiUrl + '/product')
+			.then(function (response) {
+                    setProduct(response.data.map(product => product.name))
+				}
+			).catch(function (error) {
+				console.log(error)
+			})
+			setFetchProduct(false)
+		}
+    }, [FetchProduct])
     
-// FAIRE UN USE EFFECT QUI AJOUTE TOUT AU PRODUIT A LA FIN SUR LE BOUTON
+// envoi de la composition
     useEffect(() => {
         if(Envoi){
-            axios.post(apiUrl+'/product/create', {
-                "name": Name,
-                "price": parseFloat(Price),
-                "quantity": parseInt(Quantity),
-                "idCategory": {
-                    "id" : 5,
-                    "name": CategoryName
+            axios.post(apiUrl + '/composition/create', {
+                id: 55,
+                idProduct: {
+                    id: productId,
+                    name: productName
+                },
+                idIngredient: {
+                    id: IngredientId,
+                    name: IngredientName
                 }
             })
             .catch(function (error) {
@@ -43,8 +63,13 @@ const CreateComposition = ({navigation}) => {
                 setEnvoi(false)
             });
         }
-    }, [Envoi])
+    }, [Envoi]) 
 
+    useEffect(() => {
+        if(productId){
+            console.log(productId, IngredientId)
+        }
+},[productId,IngredientId, productName])
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 			<View style={styles.container}>
@@ -52,30 +77,26 @@ const CreateComposition = ({navigation}) => {
                 {Envoi ?
                     <Text>Bien envoyé !</Text>
                     :
-                    <>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Nom du produit"
-                            value={Name}
-                            onChangeText={(text) => setProductName(text)}
-                        />
+                    <> 
                         <SelectList
-                            setSelected={(val) => setIngredientName(val)}
-                            data={Category}
+                            placeholder='Choisir le nom du produit'
+                            setSelected={(obj) => {
+                                setProductId(obj.id);
+                                setProductName(obj.name);
+                            }}
+                            data={Product}
                             save="value"
                         />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Quantite"
-                            value={Quantity}
-                            onChangeText={(text) => setQuantity(text)}
-                            keyboardType="numeric"
-                        />
                         <SelectList
-                            setSelected={(val) => setCategoryName(val)}
-                            data={Category}
+                            placeholder="Choisir le nom de l'ingredient"
+                            setSelected={(obj) => {
+                                setIngredientId(obj.id);
+                                setIngredientName(obj.name);
+                            }}
+                            data={Ingredient}
                             save="value"
                         />
+
                         <TouchableOpacity onPress={() => {
                             setEnvoi(true)
                         }
