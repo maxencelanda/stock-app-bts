@@ -4,11 +4,14 @@
 
 ```npm install```
 
+``npm install axios``
+
 ```cd /back```
 
 ```composer install```
 
 ``npm i babel-preset-expo``
+
 
 # Run
 

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { View, Text, TextInput, Button, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 
 const CreateProduct = ({navigation}) => {
-  const [Produit, setProduit] = useState([]);
   const [Name, setName] = useState('')
   const [CategoryId, setCategoryId] = useState('');
   const [CategoryName, setCategoryName]= useState('')
@@ -11,18 +10,6 @@ const CreateProduct = ({navigation}) => {
   const [Envoi, setEnvoi] = useState(false)
 
 // FAIRE UN USE EFFECT QUI AJOUTE TOUT AU PRODUIT A LA FIN SUR LE BOUTON
- useEffect(()=>{
-   setProduit([
-       "name": "Galette Saucisse",
-       "price": 9.0,
-       "quantity": 8,
-       "idCategory": {
-     "id": 2,
-         "name": "Tex-Mex\r\n"
-   }
-   ])
-
- },[Envoi])
 
   return (
     <View style={styles.container}>

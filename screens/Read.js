@@ -23,9 +23,11 @@ const Read = ({ navigation }) => {
 	useEffect(() => {
 		axios.get(apiUrl+'/product')
 		.then(function(response){
-			console.log(response.data)
-			setProduit(response.data)
-			setLoading(false)
+			if(loading === true){
+				console.log(response.data)
+				setProduit(response.data)
+				setLoading(false)
+			}
 			}
 		).catch(function(error){
 			console.log(error)
@@ -36,9 +38,11 @@ const Read = ({ navigation }) => {
 	useEffect(() => {
 		axios.post(apiUrl+'/product/delete/'+productIdToDelete)
 		.then(function (response) {
-			setLoading(true)
-			setproductIdToDelete(false)
-			setDeleteProduct(false)
+			if(deleteProduct){
+				setLoading(true)
+				setproductIdToDelete(false)
+				setDeleteProduct(false)
+			}
 			console.log(response);
 		})
 		.catch(function (error) {
@@ -74,7 +78,8 @@ const Read = ({ navigation }) => {
 				>
 					<View style={style.modalView}>
 						<Text>Modifier ou Supprimer : {productIdToDelete}</Text>
-						<Pressable style={style.button} onPress={() => setModalVisible(!modalVisible)}>
+						<Pressable style={style.button} onPress={() => {setModalVisible(!modalVisible),
+							navigation.navigate('ModifyProduct', {id: productIdToDelete})}}>
 							<Text style={style.textStyle}>Modifier</Text>
 						</Pressable>
 						<Pressable onPress={() => {
