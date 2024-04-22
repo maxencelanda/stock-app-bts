@@ -7,7 +7,6 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 const apiUrl = process.env.EXPO_PUBLIC_FIREBASE_KEY
-console.log(apiUrl)
 
 // Your web app's Firebase configuration
 const firebaseConfig = {

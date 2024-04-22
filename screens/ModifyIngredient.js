@@ -7,82 +7,58 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
 const ModifyIngredient = ({route, navigation}) => {
 	const {id} = route.params;
-	const [Produit, setProduit] = useState();
+	const [Ingredient, setIngredient] = useState();
 	const [Name, setName] = useState('')
-	const [Ingredient, setIngredient] = useState('')
+	const [Allergen, setAllergen] = useState('')
 	const [Envoi, setEnvoi] = useState(false)
-	const [FetchProduct, setFetchProduct] = useState(true)
+	const [FetchIngredient, setFetchIngredient] = useState(true)
 
 
-// fetch le product
+// fetch l'ingredient
 	useEffect(() => {
-		if (FetchProduct) {
+		if (FetchIngredient) {
 			axios.get(apiUrl + '/ingredient/' + id)
 			.then(function (response) {
-					setProduit(response.data)
+				setIngredient(response.data)
 				}
 			).catch(function (error) {
 				console.log(error)
 			})
-			setFetchProduct(false)
-		}
-	}, [FetchProduct])
 
-	// Post les données modif
+			setFetchIngredient(false)
+		}
+	}, [FetchIngredient])
+
+ 	// Post les données modif
 	useEffect(() => {
 		if (Envoi) {
-			sendProductUpdate();
+			axios.post(apiUrl + '/ingredient/edit', {
+				"id": Ingredient.id,
+				"name": Name ? Name : Ingredient.name,
+				"allergen": Allergen ? Allergen : Ingredient.allergen,
+			})
+			.catch(function (error) {
+				console.log(error.response.data);
+			});
 		}
 		setEnvoi(false)
 	}, [Envoi]);
-
-	const sendProductUpdate = () => {
-		axios.post(apiUrl + '/product/edit', {
-			"id": Produit.id,
-			"name": Name ? Name : Produit.name,
-			"price": Price ? Price : Produit.price,
-			"quantity": Quantity ? Quantity : Produit.quantity,
-			"idCategory": {
-				"id": Produit.idCategory.id,
-				"name": CategoryName ? CategoryName : Category.name,
-			}
-		})
-		.then(function (response) {
-			console.log(response)
-		})
-		.catch(function (error) {
-			console.log(error.response.data);
-		});
-	}
-
+ 
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
 			<View style={styles.container}>
-				<Text style={styles.title}>Modifier le produit : {id}</Text>
+				<Text style={styles.title}>Modifier l'ingredient : {id}</Text>
 				<TextInput
 					style={styles.input}
-					placeholder={Produit ? Produit.name : ''}
+					placeholder={Ingredient ? Ingredient.name : ''}
 					value={Name}
 					onChangeText={(text) => setName(text)}
 				/>
 				<TextInput
 					style={styles.input}
-					placeholder={Produit ? "prix : " + Produit.price.toString() : ''}
-					value={Price}
-					onChangeText={(text) => setPrice(parseInt(text))}
-					keyboardType="numeric"
-				/>
-				<TextInput
-					style={styles.input}
-					placeholder={Produit ? "quantite : " + Produit.quantity.toString() : ''}
-					value={Quantity}
-					onChangeText={(text) => setQuantity(parseInt(text))}
-					keyboardType="numeric"
-				/>
-				<SelectList
-					setSelected={(val) => setCategoryName(val)}
-					data={Category}
-					save="value"
+					placeholder={Allergen ? "Allergène : " + Ingredient.allergen : "Pas d'allergène"}
+					value={Allergen}
+					onChangeText={(text) => setAllergen(text)}
 				/>
 				<TouchableOpacity onPress={() => {
 					setEnvoi(true)

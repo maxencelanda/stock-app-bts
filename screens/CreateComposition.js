@@ -5,28 +5,26 @@ import {SelectList} from "react-native-dropdown-select-list";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
-const CreateProduct = ({navigation}) => {
-	const [Name, setName] = useState('')
-	const [Category, setCategory] = useState();
-	const [CategoryName, setCategoryName] = useState('')
-	const [Price, setPrice] = useState()
-	const [Quantity, setQuantity] = useState()
+const CreateComposition = ({navigation}) => {
+	const [productName, setProductName] = useState('')
+    const [categoryName, setCategoryName] = useState();
 	const [Envoi, setEnvoi] = useState(false)
-	const [FetchCategory, setFetchCategory] = useState(true)
+	const [FetchIngredient, setFetchIngredient] = useState(true)
+    const [Ingredient, setIngredient] = useState()
 
-	// fetch les categories
+	// fetch les ingredients
 	useEffect(() => {
-		if (FetchCategory) {
-			axios.get(apiUrl + '/category')
+		if (FetchIngredient) {
+			axios.get(apiUrl + '/ingredient')
 			.then(function (response) {
 					setCategory(response.data.map(category => category.name))
 				}
 			).catch(function (error) {
 				console.log(error)
 			})
-			setFetchCategory(false)
+			setFetchIngredient(false)
 		}
-    }, [FetchCategory])
+    }, [FetchIngredient])
     
 // FAIRE UN USE EFFECT QUI AJOUTE TOUT AU PRODUIT A LA FIN SUR LE BOUTON
     useEffect(() => {
@@ -59,14 +57,12 @@ const CreateProduct = ({navigation}) => {
                             style={styles.input}
                             placeholder="Nom du produit"
                             value={Name}
-                            onChangeText={(text) => setName(text)}
+                            onChangeText={(text) => setProductName(text)}
                         />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Prix du produit"
-                            value={Price}
-                            onChangeText={(text) => setPrice(text)}
-                            keyboardType="numeric"
+                        <SelectList
+                            setSelected={(val) => setIngredientName(val)}
+                            data={Category}
+                            save="value"
                         />
                         <TextInput
                             style={styles.input}
@@ -123,4 +119,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default CreateProduct;
+export default CreateComposition;
