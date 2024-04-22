@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ingredient;
 use App\Repository\CompositionRepository;
 use App\Repository\IngredientRepository;
+use App\Repository\IngredientStockRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -53,11 +54,15 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/ingredient/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
-    public function deleteIngredient(Ingredient $ingredient, EntityManagerInterface $em, CompositionRepository $compositionRepository)
+    public function deleteIngredient(Ingredient $ingredient, EntityManagerInterface $em, CompositionRepository $compositionRepository, IngredientStockRepository $ingredientStockRepository)
     {
         $compositions = $compositionRepository->findByIngredient($ingredient->getId());
         foreach($compositions as $compo){
             $em->remove($compo);
+        }
+        $ingredientsStocks = $ingredientStockRepository->findByIngredient($ingredient->getId());
+        foreach($ingredientsStocks as $ingredientStock){
+            $em->remove($ingredientStock);
         }
         $em->remove($ingredient);
         $em->flush();
