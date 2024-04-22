@@ -46,7 +46,7 @@ export default function App() {
         )}
         <Stack.Screen options={{ headerShown: false }} name='Register' component={RegisterScreen}/>
         <Stack.Screen options={{ headerShown: false }} name='Read' component={Read}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name='Create' component={Create}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name='CreateProduct' component={CreateProduct}></Stack.Screen>
       </Stack.Navigator>
       </View>
     </NavigationContainer>
@@ -67,13 +67,13 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name='Register' component={RegisterScreen}/>
         <Stack.Screen options={{ headerShown: false }} name='Read' component={Read}></Stack.Screen>
         <Stack.Screen options={{ headerShown: false }} name='CreateProduct' component={CreateProduct}></Stack.Screen>
-        <Stack.Screen name='ModifyProduct' component={ModifyProduct}></Stack.Screen>
-        <Stack.Screen name={'CreateCategory'} component={CreateCategory}></Stack.Screen>
-        <Stack.Screen name={'ReadCategory'} component={ReadCategory}></Stack.Screen>
-        <Stack.Screen name={'ModifyCategory'} component={ModifyCategory}></Stack.Screen>
-        <Stack.Screen name={'ReadIngredient'} component={ReadIngredient}></Stack.Screen>
-        <Stack.Screen name={'CreateIngredient'} component={CreateIngredient}></Stack.Screen>
-        <Stack.Screen name={'ModifyIngredient'} component={ModifyIngredient}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name='ModifyProduct' component={ModifyProduct}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name={'CreateCategory'} component={CreateCategory}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name={'ReadCategory'} component={ReadCategory}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name={'ModifyCategory'} component={ModifyCategory}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name={'ReadIngredient'} component={ReadIngredient}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name={'CreateIngredient'} component={CreateIngredient}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name={'ModifyIngredient'} component={ModifyIngredient}></Stack.Screen>
        </Stack.Navigator>
       </View>
     </NavigationContainer>
