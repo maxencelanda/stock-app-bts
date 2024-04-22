@@ -4,13 +4,15 @@
 
 ```npm install```
 
-``npm install axios``
+```Créer un fichier .env et y mettre les lignes suivantes:```
+
+```EXPO_PUBLIC_API_URL=http://VotreIP:8080```
+
+```EXPO_PUBLIC_FIREBASE_KEY=VotreCleApiFirebase```
 
 ```cd /back```
 
 ```composer install```
-
-``npm i babel-preset-expo``
 
 
 # Run
