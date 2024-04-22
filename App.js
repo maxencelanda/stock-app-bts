@@ -15,6 +15,9 @@ import ModifyProduct from "./screens/ModifyProduct";
 import CreateCategory from "./screens/CreateCategory";
 import ReadCategory from "./screens/ReadCategory";
 import ModifyCategory from "./screens/ModifyCategory";
+import ReadIngredient from "./screens/ReadIngredient";
+import CreateIngredient from "./screens/CreateIngredient";
+import ModifyIngredient from "./screens/ModifyIngredient";
 
 const Stack = createNativeStackNavigator()
 
@@ -45,6 +48,9 @@ export default function App() {
         <Stack.Screen name={'CreateCategory'} component={CreateCategory}></Stack.Screen>
         <Stack.Screen name={'ReadCategory'} component={ReadCategory}></Stack.Screen>
         <Stack.Screen name={'ModifyCategory'} component={ModifyCategory}></Stack.Screen>
+        <Stack.Screen name={'ReadIngredient'} component={ReadIngredient}></Stack.Screen>
+        <Stack.Screen name={'CreateIngredient'} component={CreateIngredient}></Stack.Screen>
+        <Stack.Screen name={'ModifyIngredient'} component={ModifyIngredient}></Stack.Screen>
        </Stack.Navigator>
     </NavigationContainer>
   )
