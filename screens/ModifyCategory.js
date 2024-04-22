@@ -47,7 +47,7 @@ const ModifyCategory = ({route, navigation}) => {
 				<Text style={styles.title}>Modifier le category : {id}</Text>
 				<TextInput
 					style={styles.input}
-					placeholder= {CategoryName.name ? CategoryName.name : 'test'}
+					placeholder= {CategoryName ? CategoryName : 'test'}
 					value={CategoryName}
 					onChangeText={(text) => setCategoryName(text)}
 				/>
