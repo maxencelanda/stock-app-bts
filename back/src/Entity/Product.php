@@ -17,20 +17,20 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['product', 'compositions'])]
+    #[Groups(['product', 'compositions', 'productButId'])]
     private ?string $name = null;
 
     #[ORM\Column]
-    #[Groups(['product'])]
+    #[Groups(['product', 'productButId'])]
     private ?float $price = null;
 
     #[ORM\Column]
-    #[Groups(['product'])]
+    #[Groups(['product', 'productButId'])]
     private ?int $quantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['product'])]
+    #[Groups(['product', 'productButId'])]
     private ?Category $idCategory = null;
 
     public function getId(): ?int

@@ -21,6 +21,19 @@ class IngredientStockRepository extends ServiceEntityRepository
         parent::__construct($registry, IngredientStock::class);
     }
 
+    /**
+    * @return IngredientStock[] Returns an array of Ingredient objects
+    */
+    public function findByIngredient($value): array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.idIngredient = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     //    /**
     //     * @return IngredientStock[] Returns an array of IngredientStock objects
     //     */
