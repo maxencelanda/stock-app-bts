@@ -4,19 +4,15 @@
 
 ```npm install```
 
-``npm install axios``
+```Créer un fichier .env et y mettre les lignes suivantes:```
 
-``npm i babel-preset-expo``
+```EXPO_PUBLIC_API_URL=http://VotreIP:8080```
 
-``Faire ip config pour savoir son adresse Ipv4``
-
-``Faire un fichier .env ou on met : EXPO_PUBLIC_API_URL=http://AdresseIP:Port``
+```EXPO_PUBLIC_FIREBASE_KEY=VotreCleApiFirebase```
 
 ```cd /back```
 
 ```composer install```
-
-
 
 
 # Run
@@ -28,4 +24,4 @@
 
 - Lancer une autre console dans le projet
 ```cd /back```
-```php -S localhost:80 -t public```
+```php -S VotrIP:8080 -t public```
