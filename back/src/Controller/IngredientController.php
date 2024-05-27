@@ -54,13 +54,13 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/ingredient/delete/{id}', methods:["DELETE"], requirements: ["id" => Requirement::DIGITS])]
-    public function deleteIngredient(Ingredient $ingredient, EntityManagerInterface $em, CompositionRepository $compositionRepository)
+    public function deleteIngredient(Ingredient $ingredient, EntityManagerInterface $em, CompositionRepository $compositionRepository, IngredientRepository $ingredientRepository)
     {
         $compositions = $compositionRepository->findByIngredient($ingredient->getId());
         foreach($compositions as $compo){
             $em->remove($compo);
         }
-        $ingredientsStocks = $ingredientStockRepository->findByIngredient($ingredient->getId());
+        $ingredientsStocks = $ingredientRepository->findByIngredient($ingredient->getId());
         foreach($ingredientsStocks as $ingredientStock){
             $em->remove($ingredientStock);
         }
