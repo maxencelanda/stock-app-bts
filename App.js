@@ -3,8 +3,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
-import Header from './screens/Header';
 import LoginScreen from "./screens/LoginScreen";
 import Home from './screens/Home'
 import CreateProduct from './screens/CreateProduct'
@@ -37,53 +35,30 @@ export default function App() {
   if (!user){
   return (
     <NavigationContainer>
-      <View style={styles.container}>
       <Stack.Navigator initialRouteName='LoginScreen'>
-        {user ? (
-          <Stack.Screen options={{ headerShown: false }} name='Home'>
-            {props => <Home {...props} userEmail={user.email} />}
-          </Stack.Screen>
-        ) : (
-          <Stack.Screen options={{ headerShown: false }} name='Login' component={LoginScreen} />
-        )}
-        <Stack.Screen options={{ headerShown: false }} name='Register' component={RegisterScreen}/>
-        <Stack.Screen options={{ headerShown: false }} name='Read' component={Read}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name='CreateProduct' component={CreateProduct}></Stack.Screen>
+        <Stack.Screen name='Login' component={LoginScreen} />
+        <Stack.Screen name='Register' component={RegisterScreen}/>
       </Stack.Navigator>
-      </View>
     </NavigationContainer>
   )
 } else {
   return (
     <NavigationContainer>
-      <View style={styles.container}>
-      <Stack.Navigator initialRouteName='LoginScreen'>
-        {user ? (
-          <Stack.Screen options={{ headerShown: false }} name='Home'>
-            {props => <>
-              <Header/>
-              <Home {...props} userEmail={user.email} />
-            </>}
-          </Stack.Screen>
-        ) : (
-          <Stack.Screen options={{ headerShown: false }} name='Login' component={LoginScreen} />
-        )}
-        <Stack.Screen options={{ headerShown: false }} name='Register' component={RegisterScreen}/>
-        <Stack.Screen options={{ headerShown: false }} name='Read' component={Read}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name='CreateProduct' component={CreateProduct}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name='ModifyProduct' component={ModifyProduct}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name={'CreateCategory'} component={CreateCategory}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name={'ReadCategory'} component={ReadCategory}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name={'ModifyCategory'} component={ModifyCategory}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name={'ReadIngredient'} component={ReadIngredient}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name={'CreateIngredient'} component={CreateIngredient}></Stack.Screen>
-          <Stack.Screen options={{ headerShown: false }} name={'ModifyIngredient'} component={ModifyIngredient}></Stack.Screen>
-          
-        <Stack.Screen options={{ headerShown: false }} name={'ReadComposition'} component={ReadComposition}></Stack.Screen>
-        <Stack.Screen options={{ headerShown: false }} name={'CreateComposition'} component={CreateComposition}></Stack.Screen>
-{/*         <Stack.Screen options={{ headerShown: false }} name={'ModifyComposition'} component={ModifyComposition}></Stack.Screen> */} 
+        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Read' component={Read}></Stack.Screen>
+        <Stack.Screen name='CreateProduct' component={CreateProduct}></Stack.Screen>
+        <Stack.Screen name='ModifyProduct' component={ModifyProduct}></Stack.Screen>
+        <Stack.Screen name='CreateCategory' component={CreateCategory}></Stack.Screen>
+        <Stack.Screen name='ReadCategory' component={ReadCategory}></Stack.Screen>
+        <Stack.Screen name='ModifyCategory' component={ModifyCategory}></Stack.Screen>
+        <Stack.Screen name='ReadIngredient' component={ReadIngredient}></Stack.Screen>
+        <Stack.Screen name='CreateIngredient' component={CreateIngredient}></Stack.Screen>
+        <Stack.Screen name='ModifyIngredient' component={ModifyIngredient}></Stack.Screen>
+        <Stack.Screen name='ReadComposition' component={ReadComposition}></Stack.Screen>
+        <Stack.Screen name='CreateComposition' component={CreateComposition}></Stack.Screen>
+{/*         <Stack.Screen name={'ModifyComposition'} component={ModifyComposition}></Stack.Screen> */} 
        </Stack.Navigator>
-      </View>
     </NavigationContainer>
   )
 } 

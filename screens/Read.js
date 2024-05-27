@@ -6,7 +6,6 @@ import {
 	View,
 	StyleSheet,
 	Pressable,
-	Alert,
 	Modal, SafeAreaView, ScrollView,
 } from "react-native";
 const axios = require('axios').default;
@@ -21,7 +20,7 @@ const Read = ({ navigation }) => {
 
 	//Fetch products
 	useEffect(() => {
-		axios.get(apiUrl+'/product')
+		axios.get(apiUrl + '/product')
 		.then(function(response){
 			if(loading === true){
 				console.log(response.data)
@@ -36,7 +35,7 @@ const Read = ({ navigation }) => {
 
 	// Delete the product onPress
 	useEffect(() => {
-		axios.post(apiUrl+'/product/delete/'+productIdToDelete)
+		axios.delete(apiUrl+'/product/delete/'+productIdToDelete)
 		.then(function (response) {
 			if(deleteProduct){
 				setLoading(true)
@@ -106,7 +105,6 @@ const Read = ({ navigation }) => {
 	};
 	return (
 		<SafeAreaView style={style.container}>
-
 			<View style={style.alignVertical}>
 			<Button
 				title="Ajouter un produit"

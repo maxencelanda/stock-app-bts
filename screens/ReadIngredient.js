@@ -35,7 +35,7 @@ const ReadIngredient = ({ navigation }) => {
 
 	// Delete the Ingredient onPress
 	useEffect(() => {
-		axios.post(apiUrl+'/ingredient/delete/'+ingredientIdToDelete)
+		axios.delete(apiUrl+'/ingredient/delete/'+ingredientIdToDelete)
 		.then(function (response) {
 			if(deleteIngredient){
 				setLoading(true)

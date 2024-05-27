@@ -1,23 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import {Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
-import {SelectList} from "react-native-dropdown-select-list";
+//import {SelectList} from "react-native-dropdown-select-list";
 
 const axios = require('axios').default;
 const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
-const ModifyCategory = ({route, navigation}) => {
+const ModifyCategory = ({route}) => {
 	const {id} = route.params;
 	const [Envoi, setEnvoi] = useState(false)
 	const [FetchCategory, setFetchCategory] = useState(true)
 	const [CategoryName, setCategoryName] = useState()
+	const [FetchIsGood, setFetchIsGood] = useState(false)
 
 
 	useEffect(() => {
 		if (FetchCategory) {
 			axios.get(apiUrl+'/category')
 			.then(function (response) {
-				const foundCategory = response.data.find((category)=> category.id === id);
-				setCategoryName(foundCategory);
+				const foundCategory = response.data.find((category) => category.id === id);
+				setCategoryName(foundCategory.name);
 			})
 			.catch(function (error) {
 				console.log(error)
@@ -30,10 +31,11 @@ const ModifyCategory = ({route, navigation}) => {
 	// Post les données modif
 	useEffect(() => {
 		if (Envoi) {
-			axios.post(apiUrl + '/category/edit', {
+			axios.put(apiUrl + '/category/edit', {
 				"id": id,
 				"name": CategoryName,
 			})
+			.then(setFetchIsGood(true))
 			.catch(function (error) {
 				console.log(error.response.data);
 			});
@@ -57,6 +59,9 @@ const ModifyCategory = ({route, navigation}) => {
 				} style={styles.button}>
 					<Text style={{color: '#fff'}}>Modifier</Text>
 				</TouchableOpacity>
+				<Text>
+      				{FetchIsGood ? 'La requête a réussi !' : ''}
+    			</Text>
 			</View>
 		</TouchableWithoutFeedback>
 	);

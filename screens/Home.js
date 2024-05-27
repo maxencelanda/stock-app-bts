@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 import { auth } from '../firebase'
 import { platCollection } from '../firestore'
-import { getAuth } from 'firebase/auth'
+import { getAuth,signOut } from 'firebase/auth'
 
 
-export default function Home ({ userEmail, navigation }) {
-  console.log('user received: ' + userEmail)
+export default function Home ({ navigation }) {
+
 
 const auth = getAuth();
 const handleSignOut = () => {
@@ -25,6 +25,7 @@ const handleSignOut = () => {
         <Button title={"Voir les categories"} onPress={()=> navigation.navigate("ReadCategory")}/>
         <Button title={"Voir les ingredients"} onPress={()=>navigation.navigate("ReadIngredient")}/>
         <Button title={"Voir les compositions"} onPress={()=> navigation.navigate("ReadComposition")}/>
+        <Button title={"Se déconnecter"} onPress={()=>handleSignOut()}></Button>
     </View>
   );
 }

@@ -5,7 +5,7 @@ import {SelectList} from "react-native-dropdown-select-list";
 const axios = require('axios').default;
 const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
-const ModifyProduct = ({route, navigation}) => {
+const ModifyProduct = ({route}) => {
 	const {id} = route.params;
 	const [Produit, setProduit] = useState();
 	const [Name, setName] = useState('')
@@ -55,7 +55,7 @@ const ModifyProduct = ({route, navigation}) => {
 	}, [Envoi]);
 
 	const sendProductUpdate = () => {
-		axios.post(apiUrl + '/product/edit', {
+		axios.put(apiUrl + '/product/edit', {
 			"id": Produit.id,
 			"name": Name ? Name : Produit.name,
 			"price": Price ? Price : Produit.price,

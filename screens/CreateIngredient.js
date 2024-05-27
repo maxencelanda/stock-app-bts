@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
 	Keyboard,
-	ScrollView,
 	StyleSheet,
 	Text,
 	TextInput,
@@ -13,7 +12,7 @@ import axios from "axios";
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
-const CreateIngredient = ({navigation}) => {
+const CreateIngredient = ({}) => {
 	const [Name, setName] = useState('')
 	const [Allergen, setAllergen] = useState('')
 	const [Envoi, setEnvoi] = useState(false)
@@ -51,7 +50,6 @@ const CreateIngredient = ({navigation}) => {
 	return (
 
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-			<ScrollView>
 				<View style={styles.container}>
 					<Text style={styles.title}>Ajouter un ingrédient</Text>
 					{Envoi ?
@@ -79,7 +77,6 @@ const CreateIngredient = ({navigation}) => {
 						</>
 					}
 				</View>
-			</ScrollView>
 		</TouchableWithoutFeedback>
 	);
 };

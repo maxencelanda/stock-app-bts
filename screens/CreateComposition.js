@@ -48,7 +48,6 @@ const CreateComposition = ({navigation}) => {
     useEffect(() => {
         if(Envoi){
             axios.post(apiUrl + '/composition/create', {
-                id: 55,
                 idProduct: {
                     id: productId,
                     name: productName
