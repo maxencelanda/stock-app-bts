@@ -61,7 +61,7 @@ class ProductController extends AbstractController
         $product->setIdCategory($category);
         $em->persist($product);
         $em->flush();
-        return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
+        return $this->json($product, Response::HTTP_OK, [], ['groups' => ['productButId']]);
     }
 
     #[Route('/product/delete/{id}', methods:["DELETE"], requirements: ["id" => Requirement::DIGITS])]
