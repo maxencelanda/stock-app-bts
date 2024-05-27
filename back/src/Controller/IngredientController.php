@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class IngredientController extends AbstractController
 {
-    #[Route('/ingredient')]
+    #[Route('/ingredient', methods:["GET"])]
     public function getIngredients(IngredientRepository $ingredientRepository, SerializerInterface $serializer): JsonResponse
     {
         $ingredients = $ingredientRepository->findAll();
@@ -24,13 +24,13 @@ class IngredientController extends AbstractController
         return new JsonResponse($ingredientsJson, Response::HTTP_OK, [], true);
     }
 
-    #[Route('/ingredient/{id}', requirements: ["id" => Requirement::DIGITS])]
+    #[Route('/ingredient/{id}', methods:["GET"], requirements: ["id" => Requirement::DIGITS])]
     public function getProduct(Ingredient $ingredient)
     {
         return $this->json($ingredient, Response::HTTP_OK, [], ['groups' => ['ingredients']]);
     }
 
-    #[Route('/ingredient/create', methods: ["POST", "GET"])]
+    #[Route('/ingredient/create', methods: ["POST"])]
     public function createIngredient(Request $request, EntityManagerInterface $em, SerializerInterface $serializer)
     {
         $ingredient = $serializer->deserialize($request->getContent(), Ingredient::class, 'json');
@@ -39,7 +39,7 @@ class IngredientController extends AbstractController
         return $this->json($ingredient, Response::HTTP_OK, [], ['groups' => ['ingredients']]);
     }
 
-    #[Route('/ingredient/edit', methods: ["POST", "GET"])]
+    #[Route('/ingredient/edit', methods: ["PUT"])]
     public function editIngredient(Request $request, EntityManagerInterface $em, IngredientRepository $categoryRepository)
     {
         $ingredientData = json_decode($request->getContent(), true);
@@ -52,7 +52,7 @@ class IngredientController extends AbstractController
         return $this->json($ingredient, Response::HTTP_OK, [], ['groups' => ['ingredients']]);
     }
 
-    #[Route('/ingredient/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
+    #[Route('/ingredient/delete/{id}', methods:["DELETE"], requirements: ["id" => Requirement::DIGITS])]
     public function deleteIngredient(Ingredient $ingredient, EntityManagerInterface $em, CompositionRepository $compositionRepository)
     {
         $compositions = $compositionRepository->findByIngredient($ingredient->getId());

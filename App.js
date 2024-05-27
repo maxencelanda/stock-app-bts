@@ -3,8 +3,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
-import Header from './screens/Header';
 import LoginScreen from "./screens/LoginScreen";
 import Home from './screens/Home'
 import CreateProduct from './screens/CreateProduct'

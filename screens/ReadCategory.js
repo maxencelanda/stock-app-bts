@@ -35,7 +35,7 @@ const ReadCategory = ({ navigation }) => {
 
 	// Delete the product onPress
 	useEffect(() => {
-		axios.post(apiUrl+'/category/delete/'+categoriesIdToDelete)
+		axios.delete(apiUrl+'/category/delete/'+categoriesIdToDelete)
 		.then(function (response) {
 			if(deleteCategories){
 				setLoading(true)

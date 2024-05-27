@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product')]
+    #[Route('/product', methods:["GET"])]
     public function getProducts(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
     {
         $products = $productRepository->findAll();
@@ -30,13 +30,13 @@ class ProductController extends AbstractController
         return new JsonResponse($productsJson, Response::HTTP_OK, [], true);
     }
 
-    #[Route('/product/{id}', requirements: ["id" => Requirement::DIGITS])]
+    #[Route('/product/{id}', methods:["GET"], requirements: ["id" => Requirement::DIGITS])]
     public function getProduct(Product $product)
     {
         return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }
 
-    #[Route('/product/create', methods: ["POST", "GET"])]
+    #[Route('/product/create', methods: ["POST"])]
     public function createProduct(Request $request, EntityManagerInterface $em, SerializerInterface $serializer, CategoryRepository $categoryRepository)
     {
         $productData = json_decode($request->getContent(), true);
@@ -48,7 +48,7 @@ class ProductController extends AbstractController
         return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }
 
-    #[Route('/product/edit', methods: ["POST", "GET"])]
+    #[Route('/product/edit', methods: ["PUT"])]
     public function editProduct(Request $request, EntityManagerInterface $em, CategoryRepository $categoryRepository, ProductRepository $productRepository)
     {
         $productData = json_decode($request->getContent(), true);
@@ -64,7 +64,7 @@ class ProductController extends AbstractController
         return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }
 
-    #[Route('/product/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
+    #[Route('/product/delete/{id}', methods:["DELETE"], requirements: ["id" => Requirement::DIGITS])]
     public function deleteProduct(Product $product, EntityManagerInterface $em, CompositionRepository $compositionRepository)
     {
         $compositions = $compositionRepository->findByProduct($product->getId());
@@ -77,8 +77,8 @@ class ProductController extends AbstractController
     }
 
 
-    #[Route('/product/date/{id}', requirements: ["id" => Requirement::DIGITS])]
-    public function getProductDateExp(Product $product, CompositionRepository $compositionRepository, IngredientStockRepository $ingredientStockRepository)
+    #[Route('/product/date/{id}', methods:["GET"], requirements: ["id" => Requirement::DIGITS])]
+    public function getProductDateExp(Product $product)
     {
         return $this->json($product, Response::HTTP_OK, [], ['groups' => ['product']]);
     }

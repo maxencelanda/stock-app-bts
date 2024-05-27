@@ -39,7 +39,7 @@ const ReadComposition = ({ navigation }) => {
 
  	// Delete the composition onPress
 	useEffect(() => {
-		axios.post(apiUrl+'/composition/delete/'+compositionIdToDelete)
+		axios.delete(apiUrl+'/composition/delete/'+compositionIdToDelete)
 		.then(function (response) {
 			if(deleteComposition){
 				setLoading(true)

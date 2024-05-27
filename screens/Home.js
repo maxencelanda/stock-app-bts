@@ -4,8 +4,8 @@ import { platCollection } from '../firestore'
 import { getAuth,signOut } from 'firebase/auth'
 
 
-export default function Home ({ userEmail, navigation }) {
-  console.log('user received: ' + userEmail)
+export default function Home ({ navigation }) {
+
 
 const auth = getAuth();
 const handleSignOut = () => {

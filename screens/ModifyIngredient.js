@@ -32,7 +32,7 @@ const ModifyIngredient = ({route, navigation}) => {
  	// Post les données modif
 	useEffect(() => {
 		if (Envoi) {
-			axios.post(apiUrl + '/ingredient/edit', {
+			axios.put(apiUrl + '/ingredient/edit', {
 				"id": Ingredient.id,
 				"name": Name ? Name : Ingredient.name,
 				"allergen": Allergen ? Allergen : Ingredient.allergen,
@@ -56,7 +56,7 @@ const ModifyIngredient = ({route, navigation}) => {
 				/>
 				<TextInput
 					style={styles.input}
-					placeholder={Allergen ? "Allergène : " + Ingredient.allergen : "Pas d'allergène"}
+					placeholder={Ingredient ? "Allergène : " + Ingredient.allergen : "Pas d'allergène"}
 					value={Allergen}
 					onChangeText={(text) => setAllergen(text)}
 				/>

@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class CompositionController extends AbstractController
 {
-    #[Route('/composition')]
+    #[Route('/composition',methods:["GET"])]
     public function getCompositions(CompositionRepository $compositionRepository, SerializerInterface $serializer): JsonResponse
     {
         $compositions = $compositionRepository->findAll();
@@ -27,7 +27,7 @@ class CompositionController extends AbstractController
         return new JsonResponse($compositionsJson, Response::HTTP_OK, [], true);
     }
 
-    #[Route('/composition/{id}', requirements: ["id" => Requirement::DIGITS])]
+    #[Route('/composition/{id}',methods:["GET"] , requirements: ["id" => Requirement::DIGITS])]
     public function getProduitComposition(Request $request, int $id, CompositionRepository $compositionRepository, SerializerInterface $serializer): JsonResponse
     {
         $compositions = $compositionRepository->findByProduct($id);
@@ -36,7 +36,7 @@ class CompositionController extends AbstractController
     }
     
 
-    #[Route('/composition/create', methods: ["POST", "GET"])]
+    #[Route('/composition/create', methods: ["POST"])]
     public function createComposition(Request $request, EntityManagerInterface $em, SerializerInterface $serializer, ProductRepository $productRepository, IngredientRepository $ingredientRepository)
     {
         $compositionData = json_decode($request->getContent(), true);
@@ -50,7 +50,7 @@ class CompositionController extends AbstractController
         return $this->json($composition, Response::HTTP_OK, [], ['groups' => ['compositions']]);
     }
 
-    #[Route('/composition/delete/{id}', requirements: ["id" => Requirement::DIGITS])]
+    #[Route('/composition/delete/{id}', methods:["DELETE"], requirements: ["id" => Requirement::DIGITS])]
     public function deleteComposition(Composition $composition, EntityManagerInterface $em)
     {
         $em->remove($composition);
