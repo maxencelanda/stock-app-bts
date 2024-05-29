@@ -15,53 +15,23 @@ class Label
     #[ORM\Column]
     private ?int $id = null;
 
-    /**
-     * @var Collection<int, Ingredient>
-     */
-    #[ORM\OneToMany(targetEntity: Ingredient::class, mappedBy: 'Label')]
-    private Collection $ingredients;
-
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\OneToMany(targetEntity: Ingredient::class, mappedBy: 'label')]
+    private Collection $Ingredient;
+
     public function __construct()
     {
-        $this->ingredients = new ArrayCollection();
+        $this->Ingredient = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection<int, Ingredient>
-     */
-    public function getIngredients(): Collection
-    {
-        return $this->ingredients;
-    }
-
-    public function addIngredient(Ingredient $ingredient): static
-    {
-        if (!$this->ingredients->contains($ingredient)) {
-            $this->ingredients->add($ingredient);
-            $ingredient->setLabel($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIngredient(Ingredient $ingredient): static
-    {
-        if ($this->ingredients->removeElement($ingredient)) {
-            // set the owning side to null (unless already changed)
-            if ($ingredient->getLabel() === $this) {
-                $ingredient->setLabel(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -72,6 +42,36 @@ class Label
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredient(): Collection
+    {
+        return $this->Ingredient;
+    }
+
+    public function addIngredient(Ingredient $ingredient): static
+    {
+        if (!$this->Ingredient->contains($ingredient)) {
+            $this->Ingredient->add($ingredient);
+            $ingredient->setLabel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): static
+    {
+        if ($this->Ingredient->removeElement($ingredient)) {
+            // set the owning side to null (unless already changed)
+            if ($ingredient->getLabel() === $this) {
+                $ingredient->setLabel(null);
+            }
+        }
 
         return $this;
     }

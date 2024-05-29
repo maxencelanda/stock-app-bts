@@ -23,8 +23,8 @@ class Ingredient
     #[Groups(['ingredients'])]
     private ?string $allergen = null;
 
-    #[ORM\ManyToOne(inversedBy: 'ingredients')]
-    private ?Label $Label = null;
+    #[ORM\ManyToOne(inversedBy: 'Ingredient')]
+    private ?Label $label = null;
 
     public function getId(): ?int
     {
@@ -57,12 +57,12 @@ class Ingredient
 
     public function getLabel(): ?Label
     {
-        return $this->Label;
+        return $this->label;
     }
 
-    public function setLabel(?Label $Label): static
+    public function setLabel(?Label $label): static
     {
-        $this->Label = $Label;
+        $this->label = $label;
 
         return $this;
     }

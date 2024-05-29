@@ -16,6 +16,7 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL
 const CreateIngredient = ({navigation}) => {
 	const [Name, setName] = useState('')
 	const [Allergen, setAllergen] = useState('')
+	const [Label, setLabel] = useState('')
 	const [Envoi, setEnvoi] = useState(false)
 	const [FetchCategory, setFetchCategory] = useState(false)
 
@@ -40,6 +41,7 @@ const CreateIngredient = ({navigation}) => {
 				"id": 55,
 				"name": Name,
 				"allergen": Allergen ? Allergen : ' '
+				"label": Label,
 			})
 			.catch(function (error) {
 				console.log(error.response.data);
@@ -69,6 +71,12 @@ const CreateIngredient = ({navigation}) => {
 								placeholder="Nom de l'allergène"
 								value={Allergen}
 								onChangeText={(text) => setAllergen(text)}
+							/>
+							<TextInput
+								style={styles.input}
+								placeholder="Nom du label"
+								value={Name}
+								onChangeText={(text) => setName(text)}
 							/>
 							<TouchableOpacity onPress={() => {
 								setEnvoi(true)

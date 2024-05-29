@@ -10,6 +10,7 @@ const ModifyIngredient = ({route, navigation}) => {
 	const [Ingredient, setIngredient] = useState();
 	const [Name, setName] = useState('')
 	const [Allergen, setAllergen] = useState('')
+	const [Label, setLabel] = useState('')
 	const [Envoi, setEnvoi] = useState(false)
 	const [FetchIngredient, setFetchIngredient] = useState(true)
 
@@ -36,6 +37,7 @@ const ModifyIngredient = ({route, navigation}) => {
 				"id": Ingredient.id,
 				"name": Name ? Name : Ingredient.name,
 				"allergen": Allergen ? Allergen : Ingredient.allergen,
+				"label": Label,
 			})
 			.catch(function (error) {
 				console.log(error.response.data);
