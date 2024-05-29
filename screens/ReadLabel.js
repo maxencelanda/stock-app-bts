@@ -13,15 +13,15 @@ const axios = require('axios').default;
 const apiUrl = process.env.EXPO_PUBLIC_API_URL
 
 const ReadLabel = ({ navigation }) => {
-	const [ingredient, setIngredient] = useState();
-	const [ingredientIdToDelete, setingredientIdToDelete] = useState();
-	const [deleteIngredient, setDeleteIngredient] = useState(false);
+	const [Label, setLabel] = useState();
+	const [labelIdToDelete, setLabelIdToDelete] = useState();
+	const [deleteLabel, setDeleteLabel] = useState(false);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [loading, setLoading] = useState(true)
 
 	//Fetch Ingredient
 	useEffect(() => {
-		axios.get(apiUrl+'/ingredient')
+		axios.get(apiUrl+'/Label')
 		.then(function(response){
 				if(loading === true){
 					setIngredient(response.data)
@@ -33,14 +33,14 @@ const ReadLabel = ({ navigation }) => {
 		})
 	}, [loading]);
 
-	// Delete the Ingredient onPress
+	// Delete the Label onPress
 	useEffect(() => {
-		axios.post(apiUrl+'/ingredient/delete/'+ingredientIdToDelete)
+		axios.post(apiUrl+'/label/delete/'+labelIdToDelete)
 		.then(function (response) {
 			if(deleteIngredient){
 				setLoading(true)
-				setingredientIdToDelete(false)
-				setDeleteIngredient(false)
+				setLabelIdToDelete(false)
+				setDeleteLabel(false)
 			}
 			console.log(response);
 		})
@@ -54,18 +54,16 @@ const ReadLabel = ({ navigation }) => {
 			<View style={style.produits}>
 				<Text style={{ padding: 5 }}>ID</Text>
 				<Text style={{ padding: 5 }}>Name</Text>
-				<Text style={{ padding: 5 }}>Allergen</Text>
 				<Text style={{ padding: 5 }}>Action</Text>
 			</View>
 		);
 	};
-	const Produits = ({ id, nom, allergen }) => {
+	const Produits = ({ id, nom }) => {
 		return (
 			<ScrollView>
 				<View style={style.produits}>
 					<Text style={{ padding: 5 }}>{id}</Text>
 					<Text style={{ padding: 5 }}>{nom}</Text>
-					<Text style={{ padding: 5 }}>{allergen}</Text>
 
 					<Modal
 						animationType="slide"
@@ -73,14 +71,14 @@ const ReadLabel = ({ navigation }) => {
 						visible={modalVisible}
 					>
 						<View style={style.modalView}>
-							<Text>Modifier ou Supprimer : {ingredientIdToDelete}</Text>
+							<Text>Modifier ou Supprimer : {labelIdToDelete}</Text>
 							<Pressable style={style.button} onPress={() => {setModalVisible(!modalVisible),
-								navigation.navigate('ModifyIngredient', {id: ingredientIdToDelete})}}>
+								navigation.navigate('ModifyLabel', {id: labelIdToDelete})}}>
 								<Text style={style.textStyle}>Modifier</Text>
 							</Pressable>
 							<Pressable onPress={() => {
 								setModalVisible(!modalVisible);
-								setDeleteIngredient(true)
+								setDeleteLabel(true)
 							}} style={style.button}>
 								<Text style={style.textStyle}>Supprimer</Text>
 							</Pressable>
@@ -105,14 +103,14 @@ const ReadLabel = ({ navigation }) => {
 
 			<View style={style.alignVertical}>
 				<Button
-					title="Ajouter un ingredient"
-					onPress={() => navigation.navigate("CreateIngredient")}
+					title="Ajouter un label"
+					onPress={() => navigation.navigate("CreateLabel")}
 				/>
 
 			</View>
 			<Details />
 			{loading ? (
-				<Text>Chargement des ingredient en cours...</Text>
+				<Text>Chargement des labels en cours...</Text>
 			) : (
 				<FlatList
 					data={ingredient}
@@ -120,8 +118,6 @@ const ReadLabel = ({ navigation }) => {
 						<Produits
 							id={item.id}
 							nom={item.name}
-							allergen={item.allergen ? item.allergen : 'aucun'}
-
 						/>
 					)}
 					keyExtractor={(item) => item.id}
@@ -146,7 +142,7 @@ const style= StyleSheet.create({
 	alignVertical: {
 		flexDirection: "row",
 	},
-	//css du modal, rien à foutre cest copilot qui la fait
+    
 	modalView: {
 		margin: 20,
 		backgroundColor: "white",

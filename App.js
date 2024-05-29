@@ -23,6 +23,7 @@ import ReadComposition from './screens/ReadComposition';
 import CreateComposition from './screens/CreateComposition';
 import CreateLabel from './screens/CreateLabel';
 import ModifyLabel from './screens/ModifyLabel';
+import ReadLabel from './screens/ReadLabel';
 
 const Stack = createNativeStackNavigator()
 
@@ -81,7 +82,7 @@ export default function App() {
         <Stack.Screen options={{ headerShown: false }} name={'CreateIngredient'} component={CreateIngredient}></Stack.Screen>
         <Stack.Screen options={{ headerShown: false }} name={'ModifyIngredient'} component={ModifyIngredient}></Stack.Screen>
         
-        <Stack.Screen options={{ headerShown: false }} name={'ReadLabel'} component={ReadIngredient}></Stack.Screen>
+        <Stack.Screen options={{ headerShown: false }} name={'ReadLabel'} component={ReadLabel}></Stack.Screen>
         <Stack.Screen options={{ headerShown: false }} name={'CreateLabel'} component={CreateLabel}></Stack.Screen>
         <Stack.Screen options={{ headerShown: false }} name={'ModifyLabel'} component={ModifyLabel}></Stack.Screen>
 
