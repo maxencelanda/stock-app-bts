@@ -29,13 +29,11 @@ const CreateComposition = ({navigation}) => {
 // FAIRE UN USE EFFECT QUI AJOUTE TOUT AU PRODUIT A LA FIN SUR LE BOUTON
     useEffect(() => {
         if(Envoi){
-            axios.post(apiUrl+'/product/create', {
-                "name": Name,
-                "price": parseFloat(Price),
-                "quantity": parseInt(Quantity),
+            axios.post(apiUrl+'/composition/create', {
+                "name": productName,
                 "idCategory": {
                     "id" : 5,
-                    "name": CategoryName
+                    "name": categoryName
                 }
             })
             .catch(function (error) {
@@ -56,11 +54,11 @@ const CreateComposition = ({navigation}) => {
                         <TextInput
                             style={styles.input}
                             placeholder="Nom du produit"
-                            value={Name}
+                            value={productName}
                             onChangeText={(text) => setProductName(text)}
                         />
                         <SelectList
-                            setSelected={(val) => setIngredientName(val)}
+                            setSelected={(val) => setCategoryName(val)}
                             data={Category}
                             save="value"
                         />

@@ -25,6 +25,7 @@ const handleSignOut = () => {
         <Button title={"Voir les categories"} onPress={()=> navigation.navigate("ReadCategory")}/>
         <Button title={"Voir les ingredients"} onPress={()=>navigation.navigate("ReadIngredient")}/>
         <Button title={"Voir les compositions"} onPress={()=> navigation.navigate("ReadComposition")}/>
+        <Button title={"Voir les labels"} onPress={()=> navigation.navigate("ReadLabel")}/>
     </View>
   );
 }
